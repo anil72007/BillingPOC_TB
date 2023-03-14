@@ -1,0 +1,235 @@
+<mvc:View controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.ServiceDetail" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" 
+xmlns:semantic="sap.m.semantic" 
+xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
+	xmlns:goals="com.sap.ish.pmpa.SharedBlocks.goals"
+	xmlns:personal="com.sap.ish.pmpa.SharedBlocks.personal"
+	xmlns:employment="com.sap.ish.pmpa.SharedBlocks.employment">
+    <semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="Case Data" 
+    
+    busy="{= !(${displayView>/dataLoaded} || ${displayView>/showsMessage}) }" busyIndicatorDelay="{= ${appProperties>/detailImmediateBusy} ? 0 : ${displayView>/originalBusyDelay} }">
+        <!-- <semantic:customHeaderContent>
+			<m:Button id="adaptationMode" text="{i18n>xbut.adaptui}" visible="{app>/showAdaptButton}" press="switchToAdaptionMode" sap.ui.dt:designtime="not-adaptable" />
+		</semantic:customHeaderContent> -->
+        <semantic:content>
+            <ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" showEditHeaderButton="true" 
+			editHeaderButtonPress="handleEditBtnPress" upperCaseAnchorBar="false">
+                <headerTitle>
+                    <ObjectPageDynamicHeaderTitle>
+                        <breadcrumbs>
+                            <m:Breadcrumbs id="breadcrumbsId" currentLocationText="Object Page Example">
+                                <!-- <m:Link text="Page 1 a very long link" press="handleLink1Press" />
+                                <m:Link text="Page 2 long link" press="handleLink2Press" /> -->
+                            </m:Breadcrumbs>
+                        </breadcrumbs>
+
+                        <expandedHeading>
+                            <m:HBox>
+                                <m:Title text="Condition Record View" wrapping="true" />
+                                <m:ObjectMarker type="Favorite" class="sapUiTinyMarginBegin" />
+                            </m:HBox>
+                        </expandedHeading>
+
+                        <snappedHeading>
+                            <m:FlexBox fitContainer="true" alignItems="Center">
+                                
+                                <!-- <m:Title text="Arya Stark" wrapping="true" /> -->
+                            </m:FlexBox>
+                        </snappedHeading>
+
+                        <!-- <expandedContent>
+                            <m:Text text="Senior Consultant" />
+                        </expandedContent>
+
+                        <snappedContent>
+                            <m:Text text="Senior Consultant" />
+                        </snappedContent>
+
+                        <snappedTitleOnMobile>
+                            <m:Title text="Senior Consultant" />
+                        </snappedTitleOnMobile> -->
+
+                        <actions>
+                            <m:OverflowToolbarButton icon="sap-icon://edit" text="edit header" type="Emphasized" tooltip="edit">
+                                <m:layoutData>
+                                    <m:OverflowToolbarLayoutData priority="NeverOverflow" />
+                                </m:layoutData>
+                            </m:OverflowToolbarButton>
+                            <!-- <m:OverflowToolbarButton icon="sap-icon://pull-down" text="show section" type="Emphasized" tooltip="pull-down" />
+                            <m:OverflowToolbarButton icon="sap-icon://show" text="show state" tooltip="show" />
+                            <m:Button text="Toggle Footer" press="toggleFooter" /> -->
+                            <m:Button text="" type="Transparent" icon="sap-icon://nav-back" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+                            <m:Button text="Payment Distribution" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
+                        </actions>
+                    </ObjectPageDynamicHeaderTitle>
+                </headerTitle>
+
+                <headerContent>
+                    <m:FlexBox wrap="Wrap">
+                        
+
+                    <m:Table id="idMovement" width="auto" noDataText="No data" mode="SingleSelectMaster" showSeparators="All" growing="true" 
+                    growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                        <m:infoToolbar>
+                            <m:Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                <m:content>
+                                    <m:Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:content>
+                            </m:Toolbar>
+                        </m:infoToolbar>
+                        <m:headerToolbar />
+                        <m:columns>
+                            <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+                                <m:header>
+                                    <m:Text text="Movement" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:header>
+                                <m:footer />
+                            </m:Column>
+                            <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <m:header>
+                                    <m:Text text="Start Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:header>
+                                <m:footer />
+                            </m:Column>
+                            <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <m:header>
+                                    <m:Text text="Start Time" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:header>
+                                <m:footer />
+                            </m:Column>
+                            <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <m:header>
+                                    <m:Text text="End Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:header>
+                                <m:footer />
+                            </m:Column>
+                            <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <m:header>
+                                    <m:Text text="End Time" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:header>
+                                <m:footer />
+                            </m:Column>
+                            <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <m:header>
+                                    <m:Text text="Department OU" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:header>
+                                <m:footer />
+                            </m:Column>
+                            <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <m:header>
+                                    <m:Text text="Nursing OU" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:header>
+                                <m:footer />
+                            </m:Column>
+                            <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <m:header>
+                                    <m:Text text="Attending Physician" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:header>
+                                <m:footer />
+                            </m:Column>
+                        </m:columns>
+                        <m:items>
+                            <m:ColumnListItem id= "idListMovement" type="Active">
+                                <m:cells>
+                                    <m:ObjectIdentifier title="{VisitOrder}" text="" titleActive="false" visible="true" />
+                                    <m:Text text="{path: 'Movstartdt', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <!-- <TimePicker value="{path: 'Movstarttm', type: 'sap.ui.model.type.Time'}"/> -->
+                                    <!-- <Text text="{path: 'Movstarttm'}" width="auto" visible="true" /> -->
+                                    <m:Text text="{path: 'Movstarttm',type:'sap.ui.model.odata.type.Time',formatOptions: {style: 'short'}}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <m:Text text="{path: 'Movenddt', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                    <m:Text text="{path: 'Movendtm', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern : 'HH:mm:ss' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <m:Text text="{DeptOu}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <m:Text text="{CaringOu}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <m:Text text="{AttendPhy}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </m:cells>
+                            </m:ColumnListItem>
+                        </m:items>
+                    </m:Table>
+
+                    </m:FlexBox>
+                </headerContent>
+
+                <sections>
+                    <ObjectPageSection titleUppercase="false" id="goalsSection" title="Case Data General">
+                        
+                        <subSections>
+                            <ObjectPageSubSection id="goalsSectionSS1">
+                                <blocks>
+                            <m:Table id="idItemCond" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                                <m:infoToolbar>
+                                    <m:Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                        <m:content>
+                                            <m:Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <m:Button text="Approve" type="Accept" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                        </m:content>
+                                    </m:Toolbar>
+                                </m:infoToolbar>
+                                <m:headerToolbar/>
+                                <m:columns>
+                                    <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+                                        <m:header>
+                                            <m:Text text="Condition Type" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </m:header>
+                                        <m:footer/>
+                                    </m:Column>
+                                    <!-- <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <m:header>
+                                            <m:Text text="Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </m:header>
+                                        <m:footer/>
+                                    </m:Column> -->
+                                    <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <m:header>
+                                            <m:Text text="Value" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </m:header>
+                                        <m:footer/>
+                                    </m:Column>
+                                    <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <m:header>
+                                            <m:Text text="Remark" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </m:header>
+                                        <m:footer/>
+                                    </m:Column>
+                                </m:columns>
+                                <m:items>
+                                    <m:ColumnListItem id="idListItem" type="Active">
+                                        <m:cells>
+                                            <m:ObjectIdentifier title="{CondType}" text="{CondTypeDesc}" titleActive="false" visible="true"/>
+                                            <!-- <m:Text text="{COndType}"  width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/> -->
+                                            <m:Input value="{path: 'CondValue'}" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false"  maxLength="0"/>
+                                            <!-- <m:Input value="{path: 'CondValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false"  maxLength="0"/> -->
+                                            <m:Input value="{Remark}" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                                </blocks>
+                            </ObjectPageSubSection>
+                        </subSections>
+                    </ObjectPageSection>
+
+                    
+                </sections>
+                <footer>
+                    <m:OverflowToolbar>
+                        <m:ToolbarSpacer />
+                        <m:Button type="Accept" text="Accept" />
+                        <m:Button type="Reject" text="Reject" />
+                    </m:OverflowToolbar>
+                </footer>
+            </ObjectPageLayout>
+        </semantic:content>
+        <semantic:customFooterContent>
+            <m:Button id="copyButton" text="Add Condition" press="onAdd" />
+        </semantic:customFooterContent>
+        <semantic:editAction>
+            <semantic:EditAction id="Add" press="onAdd" />
+        </semantic:editAction>
+        <semantic:deleteAction>
+            <semantic:DeleteAction id="delete" press="onDelete" />
+        </semantic:deleteAction>
+        
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press="sendEmail" />
+        </semantic:sendEmailAction>
+    </semantic:DetailPage>
+</mvc:View>

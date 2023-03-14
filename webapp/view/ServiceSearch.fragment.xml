@@ -1,0 +1,230 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.ServiceSearch" xmlns="sap.m" 
+xmlns:l="sap.ui.layout" xmlns:f="sap.ui.table">
+    <Dialog horizontalScrolling="true" showHeader="true" state="None" stretch="true" title="Service Search" type="Standard" verticalScrolling="true">
+        <content>
+            <!-- <ScrollContainer horizontal="true" vertical="true" width="100%" height="267.00000000px" visible="true">
+                <content> -->
+                    <Table id="idMovement" width="auto" noDataText="No data" mode="SingleSelectMaster" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                        <headerToolbar />
+                        <columns>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Movement" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </header>
+                                <footer />
+                            </Column>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Start Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </header>
+                                <footer />
+                            </Column>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Start Time" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </header>
+                                <footer />
+                            </Column>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="End Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </header>
+                                <footer />
+                            </Column>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="End Time" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </header>
+                                <footer />
+                            </Column>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Department OU" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </header>
+                                <footer />
+                            </Column>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Nursing OU" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </header>
+                                <footer />
+                            </Column>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Attending Physician" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </header>
+                                <footer />
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="idListMovement" type="Active">
+                                <cells>
+                                    <ObjectIdentifier title="{VisitOrder}" text="" titleActive="false" visible="true" />
+                                    <Text text="{path: 'Movstartdt', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <!-- <TimePicker value="{path: 'Movstarttm', type: 'sap.ui.model.type.Time'}"/> -->
+                                    <!-- <Text text="{path: 'Movstarttm'}" width="auto" visible="true" /> -->
+                                    <Text text="{path: 'Movstarttm',type:'sap.ui.model.odata.type.Time',formatOptions: {style: 'short'}}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <Text text="{path: 'Movenddt', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <Text text="{path: 'Movendtm', type: 'sap.ui.model.odata.type.Time', formatOptions: { pattern : 'HH:mm:ss' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <Text text="{DeptOu}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <Text text="{CaringOu}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                    <Text text="{AttendPhy}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+
+  	<!-- <Tree id="Tree" items="{path: 'TreeExample>/'}" mode="MultiSelect">
+		<CustomTreeItem>
+			<FlexBox alignItems="Start" width="100%">
+				<items>
+					<Button icon="{TreeExample>ref}" press="handleButtonPress" class="sapUiSmallMarginEnd" />
+					<Input value="{TreeExample>text}">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Input>
+				</items>
+			</FlexBox>
+		</CustomTreeItem>
+	</Tree>                -->
+                <!-- </content>
+            </ScrollContainer> -->
+             <FlexBox height="100px" alignItems="End" justifyContent="End">
+                    <SearchField placeholder="Search" showSearchButton="true" visible="true" width="300px" search="onSearch" liveChange="onSearch" />
+             </FlexBox>
+            <!-- <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                <items> -->
+                    <!-- <MultiComboBox id="idSrvGrp" showSecondaryValues="true" width="500px" selectionChange="handleSelectionChange" selectionFinish="handleSelectionFinish">
+                        <core:ListItem id="idSrvGrpListItem" key="{Clas2}" text="{Cltx2}" />
+                    </MultiComboBox> -->
+                    <!-- <SearchField placeholder="Search" showSearchButton="true" visible="true" width="704px" search="onSearch" liveChange="onSearch" /> -->
+                <!-- </items>
+                <layoutData />
+            </HBox> -->
+            <!-- <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false"> -->
+            <!-- <l:HorizontalLayout class="sapUiNoContentPadding" > -->
+            <!-- <items> -->
+            <FlexBox height="100px" alignItems="Start" justifyContent="Start">
+                <f:TreeTable
+                    id="treeTable"
+                    selectionMode="MultiToggle"
+                    rowSelectionChange="onSelect"
+                    enableColumnReordering="false"
+                    expandFirstLevel="false"
+                    editable="false"
+                    rows="{ path:'/GetServiceTreeSet' , parameters : 
+                            { treeAnnotationProperties : 
+		                    { hierarchyLevelFor : 'TreeLevel', hierarchyNodeFor : 'Node', hierarchyParentNodeFor : 'Parent', hierarchyDrillStateFor : 'Drillstate' } }}"
+                >
+                    <f:columns>
+                        <f:Column label="Description">
+                            <f:template>
+                                <Text text="{Clas2}" wrapping="false" />
+                            </f:template>
+                        </f:Column>
+
+                        <f:Column label="Description">
+                            <f:template>
+                                <Text text="{Objecttext}" wrapping="false" />
+                            </f:template>
+                        </f:Column>
+                    </f:columns>
+                </f:TreeTable>
+                <Table id="idSrcSearch" width="auto" noDataText="No data" mode="MultiSelect" 
+                showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                    <infoToolbar>
+                        <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                            <content>
+                                <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </content>
+                        </Toolbar>
+                    </infoToolbar>
+                    <headerToolbar>
+                        
+                    </headerToolbar>
+                    <columns>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+                            <header>
+                                <Text text="Material" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </header>
+                            <footer />
+                        </Column>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                            <header>
+                                <Text text="Material Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </header>
+                            <footer />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="idListSrcSearch" type="Active">
+                            <cells>
+                                <ObjectIdentifier title="{Object}" text="" titleActive="false" visible="true" />
+                                <Text text="{Objecttext}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </FlexBox>
+            <!-- <f:TreeTable
+        id="idTreeTab1"
+        selectionMode="Single"
+        enableColumnReordering="false"
+        expandFirstLevel="false">
+        rows="{
+            path : '/NodeSet',
+            parameters : {
+                treeAnnotationProperties : {
+                    hierarchyLevelFor : 'HierarchyLevel',
+                    hierarchyNodeFor : 'NodeID',
+                    hierarchyParentNodeFor : 'ParentNodeID',
+                    hierarchyDrillStateFor : 'DrillState'
+                }
+            }
+        }">
+
+        <f:columns>
+
+            <f:Column label="Description">
+                <f:template>
+                    <Text text="{Description}" wrapping="false" />
+                </f:template>
+            </f:Column>
+
+            <f:Column label="HierarchyLevel">
+                <f:template>
+                    <Text text="{HierarchyLevel}" wrapping="false" />
+                </f:template>
+            </f:Column>
+
+            <f:Column label="NodeID">
+                <f:template>
+                    <Text text="{NodeID}" wrapping="false" />
+                </f:template>
+            </f:Column>
+
+            <f:Column label="ParentNodeID">
+                <f:template>
+                    <Text text="{ParentNodeID}" wrapping="false" />
+                </f:template>
+            </f:Column>
+
+        </f:columns>
+
+    </f:TreeTable>                     -->
+            <!-- </items> -->
+            <!-- <layoutData /> -->
+            <!-- </l:HorizontalLayout> -->
+            <!-- </VBox> -->
+        </content>
+        <beginButton />
+        <buttons>
+            <Button text="Confirm" type="Default" icon="sap-icon://sys-enter-2" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress" />
+            <Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1" />
+        </buttons>
+        <customHeader />
+        <endButton />
+        <subHeader />
+    </Dialog>
+</core:FragmentDefinition>

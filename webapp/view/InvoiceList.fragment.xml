@@ -1,0 +1,132 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.InvoiceList" 
+xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.table" xmlns:fo="sap.ui.layout.form">
+    <Dialog horizontalScrolling="true" showHeader="true" state="None" stretch="true" title="Invoice List" type="Standard" verticalScrolling="true">
+        <content>
+            <!-- <FlexBox height="100px" alignItems="Start" justifyContent="Start">
+
+            </FlexBox> -->
+	<VBox class="sapUiSmallMargin">
+		<fo:SimpleForm id="SimpleFormDisplay480_Trial"
+			editable="false"
+			layout="ResponsiveGridLayout"
+			title="Address"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="3"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false" >
+			<fo:content>
+				<core:Title text="Billing Parameters" />
+                <Select id="billStatus" selectedKey="{billStatus}">
+					<items>
+						<core:Item text="Final Bill" key="FB"/>
+						<core:Item text="Interim Bill" key="IB"/>
+						<core:Item text="Test Bill" key="TB"/>
+					</items>
+				</Select>
+                <Button type="Accept"
+						text="Create Billing"
+						press="onSubmitButtonPressed" ariaDescribedBy="acceptButtonDescription genericButtonDescription" />
+				<!-- <Label text="Name" />
+				<Text text="{SupplierName}" />
+				<Label text="Street/No." />
+				<Text text="{Street} {HouseNumber}" />
+				<Label text="ZIP Code/City" />
+				<Text text="{ZIPCode} {City}" />
+				<Label text="Country" />
+				<Text text="{Country}" />
+				<core:Title text="Online" />
+				<Label text="Web" />
+				<Text text="{Url}" />
+				<Label text="Twitter" />
+				<Text text="{Twitter}" />
+				<Label text="Email" />
+				<Text text="{Email}" />
+				<Label text="Tel." />
+				<Text text="{Tel}" />
+				<Label text="SMS" />
+				<Text text="{Sms}" />
+				<core:Title text="Other" />
+				<Label text="Rating" />
+				<RatingIndicator value="{Rating}" displayOnly="true" /> -->
+				<Label text="Billing Status" />
+				<ProgressIndicator percentValue="50" displayOnly="true" />
+
+
+			</fo:content>
+		</fo:SimpleForm>
+	</VBox>
+            <FlexBox height="100px" alignItems="Start" justifyContent="Start">
+                <Table id="idInvoiceTab" width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{path: 'invoice>/'}">
+                    <!-- <infoToolbar>
+                        <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                            <content>
+                                <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </content>
+                        </Toolbar>
+                    </infoToolbar>
+                    <headerToolbar /> -->
+                    <columns>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+                            <header>
+                                <Text text="Sales Document" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </header>
+                            <footer />
+                        </Column>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                            <header>
+                                <Text text="Payer" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </header>
+                            <footer />
+                        </Column>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                            <header>
+                                <Text text="Created By" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </header>
+                            <footer />
+                        </Column>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                            <header>
+                                <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </header>
+                            <footer />
+                        </Column>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                            <header>
+                                <Text text="Net Value" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </header>
+                            <footer />
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="idInvoiceList" type="Active">
+                            <cells>
+                                <ObjectIdentifier title="{invoice>Vbeln}" text="" titleActive="false" visible="true" />
+                                <Text text="{invoice>Kunrg}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                <Text text="{invoice>Ernam}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                <ObjectNumber number="{path: 'invoice>Netwr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
+                                <Text text="{path: 'invoice>Erdat', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </FlexBox>
+        </content>
+        <beginButton />
+        <buttons>
+            <!-- <Button text="Confirm" type="Default" icon="sap-icon://sys-enter-2" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress" /> -->
+            <Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1" />
+        </buttons>
+        <customHeader />
+        <endButton />
+        <subHeader />
+    </Dialog>
+</core:FragmentDefinition>

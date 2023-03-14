@@ -1,0 +1,412 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.InvoicePayment" xmlns="sap.m">
+    <Page title="Invoice and Payment Status" showHeader="true" showFooter="true" showNavButton="true" navButtonPress="_onPageNavButtonPress">
+        <content>
+            <IconTabBar expandable="false" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
+                <items>
+                    <IconTabFilter icon="sap-icon://batch-payments" iconColor="Positive" text="Overview" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                        <content>
+                            <IconTabBar expandable="false" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
+                                <items>
+                                    <IconTabFilter icon="sap-icon://person-placeholder" iconColor="Positive" text="Total" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                        <content>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="618px" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                        <items>
+                                                            <List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" items="{path:'Invoice_header_total', templateShareable:true}">
+                                                                <infoToolbar>
+                                                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                        <content>
+                                                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </infoToolbar>
+                                                                <headerToolbar>
+                                                                    <Toolbar enabled="true" visible="true" width="" design="Solid">
+                                                                        <content>
+                                                                            <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </headerToolbar>
+                                                                <items>
+                                                                    <ObjectListItem intro="{DocumentType}" title="{InoviceNO}" number="{path: 'Amount', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" numberUnit="SGD" numberState="None" type="Active" selected="true" showMarkers="false">
+                                                                        <attributes>
+                                                                            <ObjectAttribute title="Billing ID" text="{BillingID}" active="false" visible="true"/>
+                                                                        </attributes>
+                                                                        <firstStatus>
+                                                                            <ObjectStatus text="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" state="None" visible="true"/>
+                                                                        </firstStatus>
+                                                                        <secondStatus/>
+                                                                    </ObjectListItem>
+                                                                </items>
+                                                            </List>
+                                                        </items>
+                                                        <layoutData/>
+                                                    </VBox>
+                                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                        <items>
+                                                            <List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" items="{path:'BillingIDHeader', templateShareable:true}">
+                                                                <infoToolbar>
+                                                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                        <content>
+                                                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </infoToolbar>
+                                                                <headerToolbar>
+                                                                    <Toolbar enabled="true" visible="true" width="" design="Solid">
+                                                                        <content>
+                                                                            <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </headerToolbar>
+                                                                <items>
+                                                                    <ObjectListItem intro="Billing ID" title="{BillingID}" number="{path: 'Amount', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" numberUnit="SGD" numberState="None" type="Active" selected="true" showMarkers="false">
+                                                                        <attributes>
+                                                                            <ObjectAttribute title="Billing ID" text="Item Attribute" active="false" visible="true"/>
+                                                                        </attributes>
+                                                                        <firstStatus>
+                                                                            <ObjectStatus text="30.05.2022" state="None" visible="true"/>
+                                                                        </firstStatus>
+                                                                        <secondStatus/>
+                                                                    </ObjectListItem>
+                                                                </items>
+                                                            </List>
+                                                        </items>
+                                                        <layoutData/>
+                                                    </VBox>
+                                                    <List mode="None" width="279.6750183105469px" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+                                                        <infoToolbar>
+                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                <content>
+                                                                    <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                </content>
+                                                            </Toolbar>
+                                                        </infoToolbar>
+                                                        <headerToolbar>
+                                                            <Toolbar enabled="true" visible="false" width="" design="Solid">
+                                                                <content>
+                                                                    <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                </content>
+                                                            </Toolbar>
+                                                        </headerToolbar>
+                                                        <items>
+                                                            <DisplayListItem label="Total" value="1,450" visible="true" type="Navigation" selected="false"/>
+                                                        </items>
+                                                    </List>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                        </content>
+                                    </IconTabFilter>
+                                    <IconTabFilter icon="sap-icon://person-placeholder" iconColor="Positive" text="Self Payer" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                        <content>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="618px" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                        <items>
+                                                            <List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" items="{path:'InvoiceHeaderSelfP', templateShareable:true}">
+                                                                <infoToolbar>
+                                                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                        <content>
+                                                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </infoToolbar>
+                                                                <headerToolbar>
+                                                                    <Toolbar enabled="true" visible="true" width="" design="Solid">
+                                                                        <content>
+                                                                            <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </headerToolbar>
+                                                                <items>
+                                                                    <ObjectListItem intro="{DocumentType}" title="{InoviceNO}" number="{path: 'Amount', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" numberUnit="SGD" numberState="None" type="Active" selected="true" showMarkers="false">
+                                                                        <attributes/>
+                                                                        <firstStatus>
+                                                                            <ObjectStatus text="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" state="None" visible="true"/>
+                                                                        </firstStatus>
+                                                                        <secondStatus/>
+                                                                    </ObjectListItem>
+                                                                </items>
+                                                            </List>
+                                                        </items>
+                                                        <layoutData/>
+                                                    </VBox>
+                                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                        <items>
+                                                            <List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" items="{path:'Payment', templateShareable:true}">
+                                                                <infoToolbar>
+                                                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                        <content>
+                                                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </infoToolbar>
+                                                                <headerToolbar>
+                                                                    <Toolbar enabled="true" visible="true" width="" design="Solid">
+                                                                        <content>
+                                                                            <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </headerToolbar>
+                                                                <items>
+                                                                    <ObjectListItem intro="{DocumentType}" title="{Document_Number}" number="{path: 'Amount', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" numberUnit="SGD" numberState="None" type="Active" selected="true" showMarkers="false">
+                                                                        <attributes/>
+                                                                        <firstStatus>
+                                                                            <ObjectStatus text="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" state="None" visible="true"/>
+                                                                        </firstStatus>
+                                                                        <secondStatus/>
+                                                                    </ObjectListItem>
+                                                                </items>
+                                                            </List>
+                                                        </items>
+                                                        <layoutData/>
+                                                    </VBox>
+                                                    <List mode="None" width="279.6750183105469px" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+                                                        <infoToolbar>
+                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                <content>
+                                                                    <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                </content>
+                                                            </Toolbar>
+                                                        </infoToolbar>
+                                                        <headerToolbar>
+                                                            <Toolbar enabled="true" visible="false" width="" design="Solid">
+                                                                <content>
+                                                                    <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                </content>
+                                                            </Toolbar>
+                                                        </headerToolbar>
+                                                        <items>
+                                                            <DisplayListItem label="Balance" value="-90 SGD" visible="true" type="Navigation" selected="false"/>
+                                                        </items>
+                                                    </List>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                        </content>
+                                    </IconTabFilter>
+                                    <IconTabSeparator icon="" iconDensityAware="false"/>
+                                    <IconTabFilter icon="sap-icon://person-placeholder" iconColor="Positive" text="AIA" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                        <content>
+                                            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="618px" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                <items>
+                                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                        <items>
+                                                            <List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" items="{path:'InvoiceHeaderINS', templateShareable:true}">
+                                                                <infoToolbar>
+                                                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                        <content>
+                                                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </infoToolbar>
+                                                                <headerToolbar>
+                                                                    <Toolbar enabled="true" visible="true" width="" design="Solid">
+                                                                        <content>
+                                                                            <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </headerToolbar>
+                                                                <items>
+                                                                    <ObjectListItem intro="{DocumentType}" title="{InoviceNO}" number="{path: 'Amount', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" numberUnit="SGD" numberState="None" type="Active" selected="true" showMarkers="false">
+                                                                        <attributes/>
+                                                                        <firstStatus>
+                                                                            <ObjectStatus text="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" state="None" visible="true"/>
+                                                                        </firstStatus>
+                                                                        <secondStatus/>
+                                                                    </ObjectListItem>
+                                                                </items>
+                                                            </List>
+                                                        </items>
+                                                        <layoutData/>
+                                                    </VBox>
+                                                    <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                                        <items>
+                                                            <List mode="SingleSelectMaster" width="100%" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" visible="true" items="{path:'Payment_AIA', templateShareable:true}">
+                                                                <infoToolbar>
+                                                                    <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                        <content>
+                                                                            <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </infoToolbar>
+                                                                <headerToolbar>
+                                                                    <Toolbar enabled="true" visible="true" width="" design="Solid">
+                                                                        <content>
+                                                                            <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                        </content>
+                                                                    </Toolbar>
+                                                                </headerToolbar>
+                                                                <items>
+                                                                    <ObjectListItem intro="{ID}" title="{path: 'Case', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" number="{Document_Number}" numberUnit="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" numberState="None" type="Active" selected="true" showMarkers="false">
+                                                                        <attributes>
+                                                                            <ObjectAttribute text="20000001" active="false" visible="true"/>
+                                                                        </attributes>
+                                                                        <firstStatus>
+                                                                            <ObjectStatus text="30.05.2022" state="None" visible="true"/>
+                                                                        </firstStatus>
+                                                                        <secondStatus/>
+                                                                    </ObjectListItem>
+                                                                </items>
+                                                            </List>
+                                                        </items>
+                                                        <layoutData/>
+                                                    </VBox>
+                                                    <List mode="None" width="279.6750183105469px" headerText="Header" footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true">
+                                                        <infoToolbar>
+                                                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                                                <content>
+                                                                    <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                                </content>
+                                                            </Toolbar>
+                                                        </infoToolbar>
+                                                        <headerToolbar>
+                                                            <Toolbar enabled="true" visible="false" width="" design="Solid">
+                                                                <content>
+                                                                    <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%"/>
+                                                                </content>
+                                                            </Toolbar>
+                                                        </headerToolbar>
+                                                        <items>
+                                                            <DisplayListItem label="Balance" value="-1,160 SGD" visible="true" type="Navigation" selected="false"/>
+                                                        </items>
+                                                    </List>
+                                                </items>
+                                                <layoutData/>
+                                            </HBox>
+                                        </content>
+                                    </IconTabFilter>
+                                    <IconTabSeparator icon="" iconDensityAware="false"/>
+                                </items>
+                                <content/>
+                            </IconTabBar>
+                        </content>
+                    </IconTabFilter>
+                    <IconTabSeparator icon="" iconDensityAware="false"/>
+                    <IconTabFilter icon="sap-icon://sales-document" iconColor="Positive" text="Billed Item" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                        <content>
+                            <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{path:'Bill_Item', templateShareable:true}">
+                                <infoToolbar/>
+                                <headerToolbar/>
+                                <columns>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Billing ID" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Active">
+                                        <cells>
+                                            <Text text="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{Billing_ID}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{Description}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectNumber number="{path: 'Price', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </content>
+                    </IconTabFilter>
+                    <IconTabSeparator icon="" iconDensityAware="false"/>
+                    <IconTabFilter icon="sap-icon://sales-document" iconColor="Positive" text="Invoice Line" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                        <content>
+                            <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{path:'Invoice_Line', templateShareable:true}">
+                                <infoToolbar/>
+                                <headerToolbar/>
+                                <columns>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Invoice" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Item" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Billing Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                        <header>
+                                            <Text text="Payer" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </header>
+                                        <footer/>
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem type="Active">
+                                        <cells>
+                                            <ObjectIdentifier title="{InoviceNO}" text="{DocumentType}" titleActive="false" visible="true"/>
+                                            <Text text="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{path: 'Item', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <Text text="{Description}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                            <ObjectNumber number="{path: 'Price', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None"/>
+                                            <ObjectNumber number="{path: 'Billing_price', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None"/>
+                                            <Text text="{Payer}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </content>
+                    </IconTabFilter>
+                    <IconTabSeparator icon="" iconDensityAware="false"/>
+                </items>
+                <content/>
+            </IconTabBar>
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+                <content>
+                    <ToolbarSpacer width=""/>
+                </content>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+    </Page>
+</mvc:View>

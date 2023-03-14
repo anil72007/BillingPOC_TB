@@ -1,0 +1,19 @@
+<mvc:View
+		controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.App"
+		xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.f"
+		displayBlock="true"
+		busy="{appView>/busy}"
+		busyIndicatorDelay="{appView>/delay}"
+		xmlns="sap.m">
+	<!-- <SplitApp id="idAppControl" /> -->
+
+   <App id="idAppCon"
+            busy="{appView>/busy}"
+        busyIndicatorDelay="{appView>/delay}">
+        <f:FlexibleColumnLayout
+            id="layout"
+            layout="{appView>/layout}"
+            backgroundDesign="Translucent">
+        </f:FlexibleColumnLayout>    
+    </App>	
+</mvc:View>

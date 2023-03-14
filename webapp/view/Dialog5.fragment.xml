@@ -1,0 +1,57 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.Dialog5" xmlns="sap.m">
+    <Dialog contentHeight="500px" contentWidth="1000px" horizontalScrolling="true" showHeader="true" state="None" stretch="false" title="Service for Insurance" type="Standard" verticalScrolling="true">
+        <content>
+            <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                <items>
+                    <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                        <items>
+                            <MultiComboBox editable="true" enabled="true" width="auto" valueState="None" maxWidth="100%">
+                                <items>
+                                    <core:Item text="Item" enabled="true" key="Item"/>
+                                    <core:Item text="Item" enabled="true" key="Item"/>
+                                    <core:Item text="Item" enabled="true" key="Item"/>
+                                </items>
+                            </MultiComboBox>
+                            <SearchField placeholder="Search" showSearchButton="true" visible="true" width="708.1146240234375px"/>
+                        </items>
+                        <layoutData/>
+                    </HBox>
+                    <Table width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                        <infoToolbar>
+                            <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
+                                <content>
+                                    <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </content>
+                            </Toolbar>
+                        </infoToolbar>
+                        <headerToolbar/>
+                        <columns>
+                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
+                                <header>
+                                    <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </header>
+                                <footer/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem type="Active">
+                                <cells>
+                                    <ObjectIdentifier title="Product Name" text="" titleActive="false" visible="true"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </items>
+                <layoutData/>
+            </VBox>
+        </content>
+        <beginButton/>
+        <buttons>
+            <Button text="OK" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+            <Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+        </buttons>
+        <customHeader/>
+        <endButton/>
+        <subHeader/>
+    </Dialog>
+</core:FragmentDefinition>

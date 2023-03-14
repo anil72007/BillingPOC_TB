@@ -1,0 +1,44 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.CaseList" xmlns="sap.m">
+    <Page title="Case List" showHeader="true" showFooter="true" showNavButton="false">
+        <content>
+            <DateRangeSelection displayFormat="medium" required="false" valueStateText="Invalid entry" enabled="true" visible="true" change="_onDateRangeSelectionChange"/>
+            <!-- <MultiInput maxTokens="5" enableMultiLineMode="false" showValueHelp="false" enabled="true" visible="true" required="false" valueStateText="Invalid entry" width="313.3125px" valueHelpOnly="false" maxLength="0" tokens="{path:'/GetCaseDataSet', templateShareable:true}">
+                <tokens>
+                    <Token text="{Bill_Status}" editable="true" selected="false"/>
+                </tokens>
+            </MultiInput>
+            <MultiInput maxTokens="5" enableMultiLineMode="false" showValueHelp="false" enabled="true" visible="true" required="false" valueStateText="Invalid entry" width="313.3125px" valueHelpOnly="false" maxLength="0" tokens="{path:'/CaseSet', templateShareable:true}">
+                <tokens>
+                    <Token text="{Case_Type}" editable="true" selected="false"/>
+                </tokens>
+            </MultiInput> -->
+            <List id="sap_List_Page_0-content-sap_m_ObjectList-1" mode="SingleSelectMaster" width="100%" headerText="Header" 
+            footerText="" backgroundDesign="Solid" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" 
+            visible="true" itemPress="_onObjectListItemPress" items="{path:'/GetCaseDataSet', templateShareable:true}">
+                <infoToolbar/>
+                <headerToolbar>
+                    <Toolbar enabled="true" visible="true" width="319px" design="Solid">
+                        <content>
+                            <SearchField placeholder="Search" showSearchButton="true" visible="true" width="100%" liveChange="_onSearchFieldLiveChange"/>
+                        </content>
+                    </Toolbar>
+                </headerToolbar>
+                <items>
+                    <ObjectListItem intro="{CaseType}" title="{CaseId}" number="{NameFirst}" numberUnit="{CaseStatus}" numberState="None" type="Active" selected="false" showMarkers="false">
+                        <attributes>
+                            <ObjectAttribute title="" text="{PatientId}" active="false" visible="true"/>
+                        </attributes>
+                        <firstStatus/>
+                        <secondStatus/>
+                    </ObjectListItem>
+                </items>
+            </List>
+        </content>
+        <footer>
+            <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
+                <content/>
+            </OverflowToolbar>
+        </footer>
+        <headerContent/>
+    </Page>
+</mvc:View>

@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.Log" xmlns="sap.m">
+    <Dialog contentHeight="800px" contentWidth="1000px" horizontalScrolling="true" showHeader="true" state="None" stretch="false" title="Title" type="Standard" verticalScrolling="true">
+        <content>
+            <VBox alignItems="Stretch" direction="Column" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                <items>
+                    <ScrollContainer horizontal="true" vertical="true" width="100%" height="207.25px" visible="true">
+                        <content>
+                            <TextArea value="Previous Logs" rows="100" cols="125" maxLength="0" wrapping="None" enabled="true" required="false" valueStateText="Invalid entry" visible="true" class="sapUiResponsiveMargin"/>
+                        </content>
+                    </ScrollContainer>
+                    <TextArea rows="20" placeholder="Enter new log" cols="125" maxLength="0" wrapping="None" enabled="true" required="false" valueStateText="Invalid entry" visible="true" class="sapUiResponsiveMargin"/>
+                </items>
+                <layoutData/>
+            </VBox>
+        </content>
+        <beginButton/>
+        <buttons>
+            <Button text="OK" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
+            <Button text="Cancel" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1"/>
+        </buttons>
+        <customHeader/>
+        <endButton/>
+        <subHeader/>
+    </Dialog>
+</core:FragmentDefinition>

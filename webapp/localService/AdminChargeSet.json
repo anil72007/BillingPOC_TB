@@ -1,0 +1,26 @@
+[
+    {
+        "ID": "AM01",
+        "Case": 1,
+        "Description": "ER Registration Fees",
+        "Value": 100,
+        "___FK_37f5c49eb3b7a45d1877bb78_00001": "1",
+        "Date": "/Date(1673395200000)/"
+    },
+    {
+        "ID": "AM02",
+        "Case": 2,
+        "Description": "Specialist Registration Fees",
+        "Value": 200,
+        "___FK_37f5c49eb3b7a45d1877bb78_00001": "2",
+        "Date": "/Date(1673395200000)/"
+    },
+    {
+        "ID": "AM03",
+        "Case": 3,
+        "Description": "Registration Fees",
+        "Value": 50,
+        "___FK_37f5c49eb3b7a45d1877bb78_00001": "3",
+        "Date": "/Date(1673395200000)/"
+    }
+]

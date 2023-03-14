@@ -1,0 +1,252 @@
+{
+    "_version": "1.8.0",
+    "sap.app": {
+        "_version": "1.3.0",
+        "id": "com.sap.build.standard.pocPatientServiceAndInvoice",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "applicationVersion": {
+            "version": "1.2.2"
+        },
+        "ach": "ach",
+        "resources": "resources.json",
+        "dataSources": {
+            "local": {
+                "uri": "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            }
+        },
+        "sourceTemplate": {
+            "id": "sap.ui.ui5-template-plugin.2masterdetail",
+            "version": "1.32.5",
+            "toolsId": "d7b2265e-49cc-4a37-b33a-36e546a52b7c"
+        }
+    },
+    "sap.fiori": {
+        "_version": "1.1.0",
+        "registrationIds": [],
+        "archeType": "transactional"
+    },
+    "sap.ui": {
+        "_version": "1.3.0",
+        "technology": "UI5",
+        "icons": {
+            "icon": "sap-icon://detail-view",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        },
+        "supportedThemes": ["sap_fiori_3","sap_fiori_3_dark"],
+        "fullWidth": true
+    },
+    "sap.ui5": {
+        "_version": "1.3.0",
+        "rootView": {
+            "viewName": "com.sap.build.standard.pocPatientServiceAndInvoice.view.App",
+            "type": "XML",
+            "async": false,
+            "id": "idAppCon"
+        },
+        "autoPrefixId": true,
+        "dependencies": {
+            "minUI5Version": "1.50.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            },
+            "": {
+                "dataSource": "local",
+                "type": "sap.ui.model.odata.v2.ODataModel",
+                "preload": true,
+                "settings": {}
+            },
+            "resources": {
+                "css": [{
+                    "uri": "utils/BillingPOC.css"
+                }]
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "viewPath": "com.sap.build.standard.pocPatientServiceAndInvoice.view",
+                "controlId": "idAppCon"
+
+            },
+            "targets": {
+                "OpenCases": {
+                    "viewId": "idOpenCases",
+                    "viewName": "OpenCases",
+                    "viewLevel": 1,
+                    "controlAggregation": "pages"
+                },
+                "CaseList": {
+                    "controlAggregation": "pages",
+                    "viewName": "CaseList",
+                    "viewId": "CaseList",
+                    "viewLevel": 1,
+                    "transition": "slide"
+                },
+                "ServiceList": {
+                    "controlAggregation": "pages",
+                    "viewName": "ServiceList",
+                    "viewId": "ServiceList",
+                    "viewLevel": 1,
+                    "transition": "show"
+                },
+                "ServiceDetail": {
+                    "controlAggregation": "pages",
+                    "viewName": "ServiceDetail",
+                    "viewId": "ServiceDetail",
+                    "viewLevel": 1,
+                    "transition": "show"
+                },
+                "InvoicePayment": {
+                    "controlAggregation": "pages",
+                    "viewName": "InvoicePayment",
+                    "viewId": "InvoicePayment",
+                    "viewLevel": 1,
+                    "transition": "show"
+                },
+                "InsuranceRelationship_1": {
+                    "controlAggregation": "pages",
+                    "viewName": "InsuranceRelationship_1",
+                    "viewId": "InsuranceRelationship_1",
+                    "viewLevel": 1,
+                    "transition": "show"
+                },
+                "InsuranceRelationship_2": {
+                    "controlAggregation": "pages",
+                    "viewName": "InsuranceRelationship_2",
+                    "viewId": "InsuranceRelationship_2",
+                    "viewLevel": 1,
+                    "transition": "show"
+                },
+                "InsuranceRelationship_3": {
+                    "controlAggregation": "pages",
+                    "viewName": "InsuranceRelationship_2",
+                    "viewId": "InsuranceRelationship_2",
+                    "viewLevel": 1,
+                    "transition": "show"
+                },
+                "ServiceDetailSearchSearch": {
+                    "controlAggregation": "pages",
+                    "viewName": "ServiceDetailSearchSearch",
+                    "viewId": "ServiceDetailSearchSearch",
+                    "viewLevel": 1,
+                    "transition": "show"
+                }
+            },
+            "routes": [
+                {
+                    "pattern": "CaseList",
+                    "name": "CaseList",
+                    "target": [
+                        "ServiceList",
+                        "CaseList"
+                    ]
+                },
+                {
+                    "pattern": "toServiceList/{OrdNumber}",
+                    "name": "ServiceList1",
+                    "target":  "ServiceList"
+                },
+                
+                {
+                    "pattern": "toServiceList/{OrdNumber}",
+                    "name": "ServiceList2",
+                    "target":  "ServiceList"
+                },
+                {
+                    "pattern": "toConditions/{ItmNumber}",
+                    "name": "ConditionDetails",
+                    "target":  "ServiceDetail"
+                },
+                {
+                    "pattern": "CaseList/ServiceList/:context:",
+                    "name": "ServiceList",
+                    "target": [
+                        "CaseList",
+                        "ServiceList"
+                    ]
+                },
+                {
+                    "pattern": "CaseList/ServiceDetail/:context:",
+                    "name": "ServiceDetail",
+                    "target": [
+                        "CaseList",
+                        "ServiceDetail"
+                    ]
+                },
+                {
+                    "pattern": "CaseList/InvoicePayment/:context:",
+                    "name": "InvoicePayment",
+                    "target": [
+                        "CaseList",
+                        "InvoicePayment"
+                    ]
+                },
+                {
+                    "pattern": "CaseList/InsuranceRelationship_1/:context:",
+                    "name": "InsuranceRelationship_1",
+                    "target": [
+                        "CaseList",
+                        "InsuranceRelationship_1"
+                    ]
+                },
+                {
+                    "pattern": "CaseList/InsuranceRelationship_2/:context:",
+                    "name": "InsuranceRelationship_2",
+                    "target": [
+                        "CaseList",
+                        "InsuranceRelationship_2"
+                    ]
+                },
+                {
+                    "pattern": "CaseList/InsuranceRelationship_2/{VBELN}",
+                    "name": "InsuranceRelationship_3",
+                    "target": [
+                        "CaseList",
+                        "InsuranceRelationship_2"
+                    ]
+                },
+                {
+                    "pattern": "CaseList/ServiceDetailSearchSearch/:context:",
+                    "name": "ServiceDetailSearchSearch",
+                    "target": [
+                        "CaseList",
+                        "ServiceDetailSearchSearch"
+                    ]
+                },
+                {
+                    "pattern": "",
+                    "name": "default",
+                    "target": "OpenCases"
+                }
+            ]
+        }
+    }
+}

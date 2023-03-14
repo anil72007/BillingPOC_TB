@@ -1,0 +1,62 @@
+[
+    {
+        "ID": "1",
+        "Case": "1000000",
+        "Name": "Amy Jackson",
+        "Patient_ID": "10000001",
+        "Case_Type": "ER",
+        "Age": 31,
+        "Sex": "F",
+        "Bill_Status": "Not yet bill",
+        "Admission_Date": "11.01.2023",
+        "___FK_a639b5ff574c9f3b1877bdf1_00007": "IN1"
+    },
+    {
+        "ID": "2",
+        "Case": "1000001",
+        "Name": "BK C",
+        "Patient_ID": "10000002",
+        "Case_Type": "OPD",
+        "Age": 21,
+        "Sex": "F",
+        "Bill_Status": "Not yet bill",
+        "Admission_Date": "11.01.2023",
+        "___FK_a639b5ff574c9f3b1877bdf1_00007": "IN2"
+    },
+    {
+        "ID": "3",
+        "Case": "1000002",
+        "Name": "Wings Lee",
+        "Patient_ID": "10000003",
+        "Case_Type": "IPD",
+        "Age": 33,
+        "Sex": "M",
+        "Bill_Status": "Partical Billed",
+        "Admission_Date": "11.01.2023",
+        "___FK_a639b5ff574c9f3b1877bdf1_00007": "IN3"
+    },
+    {
+        "ID": "1000003",
+        "Case": "1000003",
+        "Name": "Jad Robinson",
+        "Patient_ID": "10000004",
+        "Case_Type": "IPD",
+        "Age": 44,
+        "Sex": "M",
+        "Bill_Status": "Error",
+        "Admission_Date": "15.05.2022",
+        "___FK_a639b5ff574c9f3b1877bdf1_00007": ""
+    },
+    {
+        "ID": "1000004",
+        "Case": "1000004",
+        "Name": "Yukio",
+        "Patient_ID": "10000005",
+        "Case_Type": "OPD",
+        "Age": 46,
+        "Sex": "F",
+        "Bill_Status": "Not yet bill",
+        "Admission_Date": "22.01.2022",
+        "___FK_a639b5ff574c9f3b1877bdf1_00007": ""
+    }
+]

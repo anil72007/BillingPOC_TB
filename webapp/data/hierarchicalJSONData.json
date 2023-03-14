@@ -1,0 +1,1016 @@
+{
+    "static": {},
+    "combined": {
+        "CaseSet": [
+            {
+                "ID": "1",
+                "Nodes": [
+                    {
+                        "ID": "M1"
+                    }
+                ]
+            },
+            {
+                "ID": "2",
+                "Nodes": [
+                    {
+                        "ID": "M2"
+                    }
+                ]
+            },
+            {
+                "ID": "3",
+                "Nodes": [
+                    {
+                        "ID": "M3"
+                    }
+                ]
+            },
+            {
+                "ID": "1000003"
+            },
+            {
+                "ID": "1000004"
+            }
+        ],
+        "DrugSet": [
+            {
+                "ID": "M1",
+                "CaseID": 1,
+                "Description": "Paracetamol 500mg ",
+                "Qty": 12,
+                "UOM": "EA",
+                "Dept": "General Medinice",
+                "Nursing": "Ward 10",
+                "Price": 2,
+                "Total": 24,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_9668c5b2847848791876c66e_00001": "1"
+            },
+            {
+                "ID": "M2",
+                "CaseID": 2,
+                "Description": "Paracetamol 500mg ",
+                "Qty": 12,
+                "UOM": "EA",
+                "Dept": "General Medinice",
+                "Nursing": "Ward 10",
+                "Price": 2,
+                "Total": 24,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_9668c5b2847848791876c66e_00001": "2"
+            },
+            {
+                "ID": "M3",
+                "CaseID": 3,
+                "Description": "Salbutamol",
+                "Qty": 2,
+                "UOM": "CC",
+                "Dept": "General Medinice",
+                "Nursing": "Ward 9",
+                "Price": 10,
+                "Total": 20,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_9668c5b2847848791876c66e_00001": "3"
+            }
+        ],
+        "Clinical_ServiceSet": [
+            {
+                "ID": "S1",
+                "SID": "S1",
+                "Description": "Doctor Fees",
+                "Nodes": [
+                    {
+                        "ID": "SC01",
+                        "SID": "S1",
+                        "Description": "Base Price"
+                    },
+                    {
+                        "ID": "SC02",
+                        "SID": "S1",
+                        "Description": "Header Discount Fix"
+                    },
+                    {
+                        "ID": "SC03",
+                        "SID": "S1",
+                        "Description": "Header Discount %"
+                    },
+                    {
+                        "ID": "SC04",
+                        "SID": "S1",
+                        "Description": "Item Discount Fix"
+                    },
+                    {
+                        "ID": "SC05",
+                        "SID": "S1",
+                        "Description": "Item Discount %"
+                    },
+                    {
+                        "ID": "SC06",
+                        "SID": "S1",
+                        "Description": "Surg Charge Fix"
+                    },
+                    {
+                        "ID": "SC07",
+                        "SID": "S1",
+                        "Description": "Surg Charge %"
+                    },
+                    {
+                        "ID": "SC08",
+                        "SID": "S1",
+                        "Description": "Net Price"
+                    }
+                ]
+            },
+            {
+                "ID": "S2",
+                "SID": "S1",
+                "Description": "Physio therapy"
+            }
+        ],
+        "AdminChargeSet": [
+            {
+                "ID": "AM01",
+                "Case": 1,
+                "Description": "ER Registration Fees",
+                "Value": 100,
+                "___FK_37f5c49eb3b7a45d1877bb78_00001": "1"
+            },
+            {
+                "ID": "AM02",
+                "Case": 2,
+                "Description": "Specialist Registration Fees",
+                "Value": 200,
+                "___FK_37f5c49eb3b7a45d1877bb78_00001": "2"
+            },
+            {
+                "ID": "AM03",
+                "Case": 3,
+                "Description": "Registration Fees",
+                "Value": 50,
+                "___FK_37f5c49eb3b7a45d1877bb78_00001": "3"
+            }
+        ],
+        "RoomChargeSet": [
+            {
+                "ID": "R1",
+                "Case_ID": 2,
+                "Room": "Single",
+                "Bed_Type": null,
+                "Acc_Cat": "VIP",
+                "Day": 1,
+                "From": "11.01.2023",
+                "To": "12.01.2022",
+                "Dept_OU": "General Medicine",
+                "NUR_OU": "Ward 11",
+                "Net_Price": 1000,
+                "StatusSummary": "Not Bill",
+                "InvoiceNo": null,
+                "___FK_37f5c49eb3b7a45d1877bb78_00003": "3"
+            },
+            {
+                "ID": "R2",
+                "Case_ID": 4,
+                "Room": "4 Beds Room",
+                "Bed_Type": null,
+                "Acc_Cat": "VIP",
+                "Day": 1,
+                "From": "11.01.2023",
+                "To": "12.01.2022",
+                "Dept_OU": "CARDIO",
+                "NUR_OU": "WARD 10",
+                "Net_Price": 1200,
+                "StatusSummary": "Bill",
+                "InvoiceNo": null,
+                "___FK_37f5c49eb3b7a45d1877bb78_00003": null
+            }
+        ],
+        "ExaminationSet": [
+            {
+                "ID": "M1",
+                "CaseID": 1,
+                "Description": "X Ray",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "Radiology",
+                "Nursing": "Examination",
+                "Price": 80,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "1"
+            },
+            {
+                "ID": "M2",
+                "CaseID": 1,
+                "Description": "CBC Service",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "Lab",
+                "Nursing": "Examination",
+                "Price": 60,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "1"
+            },
+            {
+                "ID": "M3",
+                "CaseID": 1,
+                "Description": "PCR Test",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "General Medinice",
+                "Nursing": "Ward 9",
+                "Price": 50,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "1"
+            },
+            {
+                "ID": "M4",
+                "CaseID": 2,
+                "Description": "Urinalysis",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "General Medinice",
+                "Nursing": "Ward 9",
+                "Price": 100,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "2"
+            },
+            {
+                "ID": "M5",
+                "CaseID": 2,
+                "Description": "CBC Service",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "Radiology",
+                "Nursing": "Examination",
+                "Price": 80,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "2"
+            },
+            {
+                "ID": "M6",
+                "CaseID": 2,
+                "Description": "X Ray",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "Lab",
+                "Nursing": "Examination",
+                "Price": 60,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "2"
+            },
+            {
+                "ID": "M7",
+                "CaseID": 3,
+                "Description": "X Ray",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "Radiology",
+                "Nursing": "Examination",
+                "Price": 80,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "3"
+            },
+            {
+                "ID": "M8",
+                "CaseID": 3,
+                "Description": "CBC Service",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "Lab",
+                "Nursing": "Examination",
+                "Price": 60,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "3"
+            },
+            {
+                "ID": "M9",
+                "CaseID": 3,
+                "Description": "Blood Culture",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "Lab",
+                "Nursing": "Examination",
+                "Price": 60,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "3"
+            },
+            {
+                "ID": "M10",
+                "CaseID": 3,
+                "Description": "Peak flow meter",
+                "Date": "11.01.2023",
+                "Qty": 1,
+                "UOM": "EA",
+                "Dept": "General Medinice",
+                "Nursing": "Ward 9",
+                "Price": 100,
+                "Currency": "SGD",
+                "BillStatus": "Not yet bill",
+                "Invoice": null,
+                "___FK_a639b5ff574c9f3b1877bdf1_00003": "3"
+            }
+        ],
+        "InsuranceSet": [
+            {
+                "ID": "IN1",
+                "Case": 1,
+                "Name": "AIA",
+                "Coverage_Max_Fix": 0,
+                "Coverage_Max_Percentage": 80,
+                "Discount_Fix": 0,
+                "Discount_Percentage": 0,
+                "Surcharge_Fix": 0,
+                "Surcharge_Percentage": 0,
+                "Remark": "20% copayment",
+                "Verification_Indicator": "X",
+                "Control_No": "R20230111A01001"
+            },
+            {
+                "ID": "IN2",
+                "Case": 2,
+                "Name": "AIA",
+                "Coverage_Max_Fix": 0,
+                "Coverage_Max_Percentage": 80,
+                "Discount_Fix": 0,
+                "Discount_Percentage": 0,
+                "Surcharge_Fix": 0,
+                "Surcharge_Percentage": 0,
+                "Remark": "20% copayment",
+                "Verification_Indicator": "X",
+                "Control_No": "R20230111A01002"
+            },
+            {
+                "ID": "IN3",
+                "Case": 3,
+                "Name": "AIX",
+                "Coverage_Max_Fix": 0,
+                "Coverage_Max_Percentage": 100,
+                "Discount_Fix": 0,
+                "Discount_Percentage": 0,
+                "Surcharge_Fix": 0,
+                "Surcharge_Percentage": 0,
+                "Remark": "Fully Cover",
+                "Verification_Indicator": "X",
+                "Control_No": "R20230111A01003"
+            }
+        ],
+        "MovementSet": [
+            {
+                "ID": "MV1",
+                "Case": 1,
+                "Movement": "ER Registration",
+                "Date": "11.05.2023",
+                "Dept_OU": "ER",
+                "Nursing_OU": "ER",
+                "___FK_095e81f730483d8f1877e29e_00001": "1"
+            },
+            {
+                "ID": "MV2",
+                "Case": 1,
+                "Movement": "Visit ",
+                "Date": "11.05.2023",
+                "Dept_OU": "Radiology",
+                "Nursing_OU": "X-Ray",
+                "___FK_095e81f730483d8f1877e29e_00001": "1"
+            },
+            {
+                "ID": "MV3",
+                "Case": 2,
+                "Movement": "OP Registration",
+                "Date": "11.05.2023",
+                "Dept_OU": "General Medicine",
+                "Nursing_OU": "GP Clinic",
+                "___FK_095e81f730483d8f1877e29e_00001": "2"
+            },
+            {
+                "ID": "MV4",
+                "Case": 2,
+                "Movement": "Visit ",
+                "Date": "11.05.2023",
+                "Dept_OU": "Diagnostic Ultrasound",
+                "Nursing_OU": "Ultrasound Clinic",
+                "___FK_095e81f730483d8f1877e29e_00001": "2"
+            },
+            {
+                "ID": "MV5",
+                "Case": 3,
+                "Movement": "IP Registration",
+                "Date": "11.05.2023",
+                "Dept_OU": "Respiratory",
+                "Nursing_OU": "Isolation Ward",
+                "___FK_095e81f730483d8f1877e29e_00001": "3"
+            },
+            {
+                "ID": "MV6",
+                "Case": 3,
+                "Movement": "Visit ",
+                "Date": "11.05.2023",
+                "Dept_OU": "Radiology",
+                "Nursing_OU": "X-Ray",
+                "___FK_095e81f730483d8f1877e29e_00001": "3"
+            }
+        ],
+        "Service_ListSet": [
+            {
+                "ID": "SM1",
+                "Description": "Std Consultation Fees",
+                "Price": "80"
+            },
+            {
+                "ID": "SM2",
+                "Description": "Specailist Consultation Fees",
+                "Price": "120"
+            },
+            {
+                "ID": "SM3",
+                "Description": "Complex Consultation Fees",
+                "Price": "200"
+            },
+            {
+                "ID": "SM4",
+                "Description": "Std Doctor Round Fees",
+                "Price": "50"
+            },
+            {
+                "ID": "SM5",
+                "Description": "Specailist Doctor Round Fees",
+                "Price": "80"
+            },
+            {
+                "ID": "SM6",
+                "Description": "Complex Consultation Fees",
+                "Price": "120"
+            },
+            {
+                "ID": "SM7",
+                "Description": "Doctor Fees",
+                "Price": "50"
+            }
+        ],
+        "Service_conditionsSet": [
+            {
+                "ID": "SC01",
+                "SID": "S1",
+                "Description": "Base Price",
+                "Rate": 200,
+                "Value": 200,
+                "Remark": null,
+                "___FK_095e81f730483d8f1877e29e_00007": "S1"
+            },
+            {
+                "ID": "SC02",
+                "SID": "S1",
+                "Description": "Header Discount Fix",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_095e81f730483d8f1877e29e_00007": "S1"
+            },
+            {
+                "ID": "SC03",
+                "SID": "S1",
+                "Description": "Header Discount %",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_095e81f730483d8f1877e29e_00007": "S1"
+            },
+            {
+                "ID": "SC04",
+                "SID": "S1",
+                "Description": "Item Discount Fix",
+                "Rate": 5,
+                "Value": -5,
+                "Remark": "Special Promotion",
+                "___FK_095e81f730483d8f1877e29e_00007": "S1"
+            },
+            {
+                "ID": "SC05",
+                "SID": "S1",
+                "Description": "Item Discount %",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_095e81f730483d8f1877e29e_00007": "S1"
+            },
+            {
+                "ID": "SC06",
+                "SID": "S1",
+                "Description": "Surg Charge Fix",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_095e81f730483d8f1877e29e_00007": "S1"
+            },
+            {
+                "ID": "SC07",
+                "SID": "S1",
+                "Description": "Surg Charge %",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_095e81f730483d8f1877e29e_00007": "S1"
+            },
+            {
+                "ID": "SC08",
+                "SID": "S1",
+                "Description": "Net Price",
+                "Rate": 195,
+                "Value": 195,
+                "Remark": null,
+                "___FK_095e81f730483d8f1877e29e_00007": "S1"
+            }
+        ],
+        "Service_condition_in_searchSet": [
+            {
+                "ID": "SC01",
+                "SID": "S1",
+                "Description": "Base Price",
+                "Rate": 200,
+                "Value": 200,
+                "Remark": null,
+                "___FK_73d087060bba5e9618782033_00001": "S1"
+            },
+            {
+                "ID": "SC02",
+                "SID": "S1",
+                "Description": "Header Discount Fix",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_73d087060bba5e9618782033_00001": "S1"
+            },
+            {
+                "ID": "SC03",
+                "SID": "S1",
+                "Description": "Header Discount %",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_73d087060bba5e9618782033_00001": "S1"
+            },
+            {
+                "ID": "SC04",
+                "SID": "S1",
+                "Description": "Item Discount Fix",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_73d087060bba5e9618782033_00001": "S1"
+            },
+            {
+                "ID": "SC05",
+                "SID": "S1",
+                "Description": "Item Discount %",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_73d087060bba5e9618782033_00001": "S1"
+            },
+            {
+                "ID": "SC06",
+                "SID": "S1",
+                "Description": "Surg Charge Fix",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_73d087060bba5e9618782033_00001": "S1"
+            },
+            {
+                "ID": "SC07",
+                "SID": "S1",
+                "Description": "Surg Charge %",
+                "Rate": 0,
+                "Value": 0,
+                "Remark": null,
+                "___FK_73d087060bba5e9618782033_00001": "S1"
+            },
+            {
+                "ID": "SC08",
+                "SID": "S1",
+                "Description": "Net Price",
+                "Rate": 200,
+                "Value": 200,
+                "Remark": null,
+                "___FK_73d087060bba5e9618782033_00001": "S1"
+            }
+        ],
+        "Invoice_LineSet": [
+            {
+                "ID": "INV1",
+                "Case": "3",
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Item": 10,
+                "Description": "Registration Fees",
+                "Price": 50,
+                "Billing_price": 40,
+                "Payer": "AIA",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV02",
+                "Case": "3",
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Item": 20,
+                "Description": "Room Charge",
+                "Price": 1000,
+                "Billing_price": 800,
+                "Payer": "AIA",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV03",
+                "Case": "3",
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Item": 30,
+                "Description": "Medication",
+                "Price": 20,
+                "Billing_price": 16,
+                "Payer": "AIA",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV04",
+                "Case": "3",
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Item": 40,
+                "Description": "X Ray",
+                "Price": 80,
+                "Billing_price": 64,
+                "Payer": "AIA",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV05",
+                "Case": "3",
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Item": 50,
+                "Description": "CBC Service",
+                "Price": 60,
+                "Billing_price": 48,
+                "Payer": "AIA",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV06",
+                "Case": "3",
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Item": 60,
+                "Description": "Blood Culture",
+                "Price": 60,
+                "Billing_price": 48,
+                "Payer": "AIA",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV07",
+                "Case": "3",
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Item": 70,
+                "Description": "Peak flow meter",
+                "Price": 100,
+                "Billing_price": 80,
+                "Payer": "AIA",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV08",
+                "Case": "3",
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Item": 80,
+                "Description": "Physio Therapy",
+                "Price": 80,
+                "Billing_price": 64,
+                "Payer": "AIA",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV09",
+                "Case": "3",
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Item": 10,
+                "Description": "Registration Fees",
+                "Price": 50,
+                "Billing_price": 10,
+                "Payer": "Wings Lee",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV10",
+                "Case": "3",
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Item": 20,
+                "Description": "Room Charge",
+                "Price": 1000,
+                "Billing_price": 200,
+                "Payer": "Wings Lee",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV11",
+                "Case": "3",
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Item": 30,
+                "Description": "Medication",
+                "Price": 20,
+                "Billing_price": 4,
+                "Payer": "Wings Lee",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV12",
+                "Case": "3",
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Item": 40,
+                "Description": "X Ray",
+                "Price": 80,
+                "Billing_price": 16,
+                "Payer": "Wings Lee",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV13",
+                "Case": "3",
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Item": 50,
+                "Description": "CBC Service",
+                "Price": 60,
+                "Billing_price": 12,
+                "Payer": "Wings Lee",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV14",
+                "Case": "3",
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Item": 60,
+                "Description": "Blood Culture",
+                "Price": 60,
+                "Billing_price": 12,
+                "Payer": "Wings Lee",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV15",
+                "Case": "3",
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Item": 70,
+                "Description": "Peak flow meter",
+                "Price": 100,
+                "Billing_price": 20,
+                "Payer": "Wings Lee",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            },
+            {
+                "ID": "IV16",
+                "Case": "3",
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Item": 80,
+                "Description": "Physio Therapy",
+                "Price": 80,
+                "Billing_price": 16,
+                "Payer": "Wings Lee",
+                "___FK_f2f071f5010dbbcf18790e57_00001": "3",
+                "BillingID": "300000000"
+            }
+        ],
+        "InvoiceHeaderINSSet": [
+            {
+                "ID": "INVH1",
+                "Case": 3,
+                "InoviceNO": "1000001",
+                "DocumentType": "Invoice",
+                "Payer": "AIA",
+                "Amount": 1160,
+                "___FK_f2f071f5010dbbcf18790e57_00003": "3",
+                "BillingID": "300000000"
+            }
+        ],
+        "InvoiceHeaderSelfPSet": [
+            {
+                "ID": "INVHS1",
+                "Case": 3,
+                "InoviceNO": "1000002",
+                "DocumentType": "Invoice",
+                "Payer": "Wings Lee",
+                "Amount": 290,
+                "___FK_f2f071f5010dbbcf18790e57_00005": "3",
+                "BillingID": "300000000"
+            }
+        ],
+        "PaymentSet": [
+            {
+                "ID": "PAY01",
+                "Case": 3,
+                "Document_Number": "2000001",
+                "DocumentType": "Deposit",
+                "Payer": "Wings Lee",
+                "Amount": 200,
+                "___FK_f2f071f5010dbbcf18790e57_00007": "3"
+            }
+        ],
+        "Payment_AIASet": [
+            {
+                "ID": "PAYI01",
+                "Case": 1,
+                "Document_Number": "20000002",
+                "DocumentType": "Deposit",
+                "Payer": "Amy Jackson",
+                "Amount": 200,
+                "___FK_f2f071f5010dbbcf18790e57_00009": "1"
+            }
+        ],
+        "Bill_ItemSet": [
+            {
+                "ID": "BillItem01",
+                "Case": 3,
+                "Billing_ID": "300000000",
+                "DocumentType": "Invoice",
+                "Item": 10,
+                "Description": "Registration Fees",
+                "Price": 50,
+                "Billing_price": 40,
+                "Payer": "AIA",
+                "___FK_8182d4c7e0ed0ec218793581_00001": "3"
+            },
+            {
+                "ID": "BillItem02",
+                "Case": 3,
+                "Billing_ID": "300000000",
+                "DocumentType": "Invoice",
+                "Item": 20,
+                "Description": "Room Charge",
+                "Price": 1000,
+                "Billing_price": 800,
+                "Payer": "AIA",
+                "___FK_8182d4c7e0ed0ec218793581_00001": "3"
+            },
+            {
+                "ID": "BillItem03",
+                "Case": 3,
+                "Billing_ID": "300000000",
+                "DocumentType": "Invoice",
+                "Item": 30,
+                "Description": "Medication",
+                "Price": 20,
+                "Billing_price": 16,
+                "Payer": "AIA",
+                "___FK_8182d4c7e0ed0ec218793581_00001": "3"
+            },
+            {
+                "ID": "BillItem04",
+                "Case": 3,
+                "Billing_ID": "300000000",
+                "DocumentType": "Invoice",
+                "Item": 40,
+                "Description": "X Ray",
+                "Price": 80,
+                "Billing_price": 64,
+                "Payer": "AIA",
+                "___FK_8182d4c7e0ed0ec218793581_00001": "3"
+            },
+            {
+                "ID": "BillItem05",
+                "Case": 3,
+                "Billing_ID": "300000000",
+                "DocumentType": "Invoice",
+                "Item": 50,
+                "Description": "CBC Service",
+                "Price": 60,
+                "Billing_price": 48,
+                "Payer": "AIA",
+                "___FK_8182d4c7e0ed0ec218793581_00001": "3"
+            },
+            {
+                "ID": "BillItem06",
+                "Case": 3,
+                "Billing_ID": "300000000",
+                "DocumentType": "Invoice",
+                "Item": 60,
+                "Description": "Blood Culture",
+                "Price": 60,
+                "Billing_price": 48,
+                "Payer": "AIA",
+                "___FK_8182d4c7e0ed0ec218793581_00001": "3"
+            },
+            {
+                "ID": "BillItem07",
+                "Case": 3,
+                "Billing_ID": "300000000",
+                "DocumentType": "Invoice",
+                "Item": 70,
+                "Description": "Peak flow meter",
+                "Price": 100,
+                "Billing_price": 80,
+                "Payer": "AIA",
+                "___FK_8182d4c7e0ed0ec218793581_00001": "3"
+            },
+            {
+                "ID": "BillItem08",
+                "Case": 3,
+                "Billing_ID": "300000000",
+                "DocumentType": "Invoice",
+                "Item": 80,
+                "Description": "Physio Therapy",
+                "Price": 80,
+                "Billing_price": 64,
+                "Payer": "AIA",
+                "___FK_8182d4c7e0ed0ec218793581_00001": "3"
+            }
+        ],
+        "Invoice_header_totalSet": [
+            {
+                "ID": "INVHT1",
+                "Case": 3,
+                "InoviceNO": "10000001",
+                "DocumentType": "Invoice",
+                "Payer": "AIA",
+                "Amount": 1160,
+                "___FK_8182d4c7e0ed0ec218793581_00007": "3",
+                "BillingID": "3000000"
+            },
+            {
+                "ID": "INVHT2",
+                "Case": 3,
+                "InoviceNO": "10000002",
+                "DocumentType": "Invoice",
+                "Payer": "Wings Lee",
+                "Amount": 290,
+                "___FK_8182d4c7e0ed0ec218793581_00007": "3",
+                "BillingID": "3000000"
+            }
+        ],
+        "BillingIDHeaderSet": [
+            {
+                "ID": "BID001",
+                "BillingID": "300000000",
+                "Amount": 1450,
+                "___FK_8182d4c7e0ed0ec218793581_00010": "3"
+            }
+        ]
+    }
+}
