@@ -196,7 +196,7 @@ sap.ui.define([
 			// debugger;
 			var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
 			var oModel = new sap.ui.model.odata.ODataModel(url, true);
-	
+
 
 			var addItems = this.getView().byId("idSrcSearch").getSelectedItems();
 			var headItem = this.getView().getModel("main").getData().To_Items.results.filter(item => item.ItemCateg === 'ZADH');
@@ -216,8 +216,8 @@ sap.ui.define([
 			// });
 			// var tz = new Date(0).getTimezoneOffset() * 60 * 1000;
 			// var timeStr = timeFormat.format(new Date(now.ms + tz));
-			
-			
+
+
 			for (var i = 0; i < addItems.length; i++) {
 				lineItem = lineItem + 10;
 				let res = lineItem.toString().padStart(itemno.length, '0')
@@ -244,8 +244,8 @@ sap.ui.define([
 					"Mode": "INS"
 				};
 				oData.To_Items.results.push(data);
-				var efilter = "$filter=ITM_NUMBER eq '" + res + "' and PARTN_NUMB eq '" + oData.PartNo + "' and MATERIAL eq '" 
-																+ this.getView().byId("idSrcSearch").getSelectedItems()[i].getCells()[0].getTitle() + "'";
+				var efilter = "$filter=ITM_NUMBER eq '" + res + "' and PARTN_NUMB eq '" + oData.PartNo + "' and MATERIAL eq '"
+					+ this.getView().byId("idSrcSearch").getSelectedItems()[i].getCells()[0].getTitle() + "'";
 
 				var url = "SimPriceHeadSet?$expand=To_SimPrice" + "&&" + efilter;
 				var that = this;
@@ -257,11 +257,11 @@ sap.ui.define([
 						for (var i = 0; i < oData.results[0].To_SimPrice.results.length; i++) {
 							tItem = oData.results[0].To_SimPrice.results[i].ItmNumber;
 							var itemCond = {
-								"SdDoc" : that.getView().byId("idtab").getItems()[that.getView().byId("idtab").getItems().length - 1].getCells()[0].getTitle(),
-								"ItmNumber" : oData.results[0].To_SimPrice.results[i].ItmNumber,
-								"CondType" : oData.results[0].To_SimPrice.results[i].CondType,
-								"CondTypeDesc" : oData.results[0].To_SimPrice.results[i].CondTypeDesc,
-								"CondValue" : oData.results[0].To_SimPrice.results[i].CondValue
+								"SdDoc": that.getView().byId("idtab").getItems()[that.getView().byId("idtab").getItems().length - 1].getCells()[0].getTitle(),
+								"ItmNumber": oData.results[0].To_SimPrice.results[i].ItmNumber,
+								"CondType": oData.results[0].To_SimPrice.results[i].CondType,
+								"CondTypeDesc": oData.results[0].To_SimPrice.results[i].CondTypeDesc,
+								"CondValue": oData.results[0].To_SimPrice.results[i].CondValue
 
 							};
 							tPrice = tPrice + parseInt(oData.results[0].To_SimPrice.results[i].CondValue);
@@ -271,6 +271,17 @@ sap.ui.define([
 						itemUpd[0].NetValue = tPrice.toString();
 						that.getView().getModel("main").refresh();
 
+						var oTable = that.getView().byId("idtab");
+						var oContext = oTable.getBindingContext();
+
+						// Get the binding object of your table
+						var oBinding = oTable.getBinding("items");
+						for (var j = 0; j < oTable.getItems().length; j++) {
+							
+							if(oTable.getItems()[j].getCells()[1].getText() === tItem){
+								oTable.getItems()[j].getCells()[5].setNumber(tPrice);
+							}
+						}
 					},
 					function _onError(oError) {
 						debugger;
@@ -328,8 +339,8 @@ sap.ui.define([
 				// 	// Add the CSS class to the new row
 				// 	selectedRow.addStyleClass("highlighted-row");
 				//   });
-				
-			
+
+
 				this.getView().byId("idtab").addItem(columnListItemNewLine);
 
 			}
