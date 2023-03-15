@@ -34,7 +34,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					const index = array.findIndex(element => element["ItmNumber"] === value);
 					if (index !== -1) {
 						//   array.splice(index, 1);
-						that.getView().getModel("main").getData().To_Items.results[index].Mode = 'DEL';
+						if(that.getView().getModel("main").getData().To_Items.results[index].Mode === 'INS'){
+							that.getView().getModel("main").getData().To_Items.results.splice(index,1);
+						}else{
+							that.getView().getModel("main").getData().To_Items.results[index].Mode = 'DEL';
+						}
 					}
 				} else {
 					// User clicked "No", do nothing
@@ -219,6 +223,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						beginButton: new sap.m.Button({
 							text: "OK",
 							press: function () {
+								// that.getView().getModel().refresh();
+								// var oWindow = sap.ui.getCore().getWindow();
+								window.location.reload();
 								that.popupView.destroy();
 								dialog.close();
 							}

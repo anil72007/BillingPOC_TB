@@ -52,6 +52,25 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			// }
 
 		},
+		onRowChange: function (oEvent) {
+			
+			var rowContext = oEvent.getSource().getBindingContext();
+			var cData = this.getOwnerComponent().getCompData();
+
+			var tData = cData.results[0].To_Items.results.filter(item => item.ItemCateg === 'ZADH' && item.ItmNumber === oEvent.getSource().getModel().getProperty(oEvent.getSource().getBindingContext().sPath).ItmNumber );
+			if(tData[0].Mode === ''){
+				tData[0].Mode = 'UPD';
+				oEvent.getSource().getModel().getProperty(oEvent.getSource().getBindingContext().sPath).Mode = 'UPD';
+			}else{
+				oEvent.getSource().getModel().getProperty(oEvent.getSource().getBindingContext().sPath).Mode = tData[0].Mode;
+			}
+			
+			//oEvent.getSource().getBindingInfo("value").binding.getPath()
+			//oEvent.getSource().getBindingContext().getProperty('CondValue')
+
+			// oEvent.getSource().getBindingContext().sPath
+			// oEvent.getSource().getModel().getProperty(oEvent.getSource().getBindingContext().sPath)
+		},
 		getConditionData: function (oEvent) {
 			debugger;
 			var cData = this.getOwnerComponent().getCompData();
@@ -88,7 +107,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				template: this.oTempMovement
 			});
 
-			
+
 		},
 		onAdd: function (oEvent) {
 			var that = this;

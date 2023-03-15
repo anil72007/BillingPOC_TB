@@ -20,8 +20,6 @@
     "start-mock": "fiori run --open \"test/flpSandboxMockServer.html?sap-ui-xx-viewCache=false#app-tile\""
   },
   "devDependencies": {
-    "@sap/ux-ui5-tooling": "^1.9.1",
-    "@ui5/cli": "^2.14.1",
     "rimraf": "3.0.2"
   },
   "ui5": {
@@ -39,5 +37,20 @@
     "url": "https://github.com/WingsLeeSG/BillingAppPOC/issues"
   },
   "homepage": "https://github.com/WingsLeeSG/BillingAppPOC#readme",
+  "dependencies": {
+    "@sap/ux-ui5-tooling": "^1.9.1",
+    "@ui5/cli": "^3.0.4",
+    "balanced-match": "^1.0.2",
+    "brace-expansion": "^1.1.11",
+    "concat-map": "^0.0.1",
+    "fs.realpath": "^1.0.0",
+    "glob": "^7.2.3",
+    "inflight": "^1.0.6",
+    "inherits": "^2.0.4",
+    "minimatch": "^3.1.2",
+    "once": "^1.4.0",
+    "path-is-absolute": "^1.0.1",
+    "wrappy": "^1.0.2"
+  },
   "description": ""
 }

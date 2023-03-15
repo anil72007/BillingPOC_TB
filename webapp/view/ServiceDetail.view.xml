@@ -16,10 +16,10 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
                 <headerTitle>
                     <ObjectPageDynamicHeaderTitle>
                         <breadcrumbs>
-                            <m:Breadcrumbs id="breadcrumbsId" currentLocationText="Object Page Example">
+                            <!-- <m:Breadcrumbs id="breadcrumbsId" currentLocationText="Object Page Example"> -->
                                 <!-- <m:Link text="Page 1 a very long link" press="handleLink1Press" />
                                 <m:Link text="Page 2 long link" press="handleLink2Press" /> -->
-                            </m:Breadcrumbs>
+                            <!-- </m:Breadcrumbs> -->
                         </breadcrumbs>
 
                         <expandedHeading>
@@ -195,9 +195,9 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
                                         <m:cells>
                                             <m:ObjectIdentifier title="{CondType}" text="{CondTypeDesc}" titleActive="false" visible="true"/>
                                             <!-- <m:Text text="{COndType}"  width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/> -->
-                                            <m:Input value="{path: 'CondValue'}" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false"  maxLength="0"/>
+                                            <m:Input value="{path: 'CondValue'}" type="Text" change="onRowChange" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false"  maxLength="0"/>
                                             <!-- <m:Input value="{path: 'CondValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false"  maxLength="0"/> -->
-                                            <m:Input value="{Remark}" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+                                            <m:Input value="{Remark}" type="Text" showValueHelp="false" change="onRowChange" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
                                         </m:cells>
                                     </m:ColumnListItem>
                                 </m:items>
