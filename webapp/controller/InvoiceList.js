@@ -9,7 +9,7 @@ sap.ui.define([
 	"com/sap/build/standard/pocPatientServiceAndInvoice/utils/format"
 ], function (ManagedObject, MessageBox, Utilities, GroupState,History, Filter, FilterOperator,format) {
 	formatter: format
-	return ManagedObject.extend("com.sap.build.stand	ard.pocPatientServiceAndInvoice.controller.InvoiceList", {
+	return ManagedObject.extend("com.sap.build.standard.pocPatientServiceAndInvoice.controller.InvoiceList", {
 		constructor: function (oView) {
 
 			this._oView = oView;
@@ -18,45 +18,58 @@ sap.ui.define([
 
 
 		},
+		onAfterRendering: function(){
+			debugger;
+		},
 		onInit: function () {
 			debugger;
-			this.cData = this.getOwnerComponent().getCompData();
-			var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
-			var oModel = new sap.ui.model.odata.ODataModel(url, true);
-			var oInitialSorter = new sap.ui.model.Sorter("Kunrg");
-			this._oGroupState = new GroupState(oInitialSorter, this.getOwnerComponent().getModel("i18n").getResourceBundle());
 
-			this.invoice = new sap.ui.model.json.JSONModel();
-			this.invTab = this.getView().byId("idInvoiceTab");
-
-			this.getView().setModel(this.invoice, "invoice");
-			// this.invTab.setModel(this.invoice);
+			var oTable = this.getView().byId("idInvoiceTab");
+			oTable.attachEvent("onAfterRendering", function() {
+				// table is completely rendered
+				var oInitialSorter = new sap.ui.model.Sorter("Kunrg");
+				this._oGroupState = new GroupState(oInitialSorter, this.getOwnerComponent().getModel("i18n").getResourceBundle());
+				var aSorters = this._oGroupState.groupBy("Kunrg");
+				this.getView().byId("idInvoiceTab").getBinding("items").sort(aSorters);
+			});
 			
-			this.listInvoice = this.getView().byId("idInvoiceList");
-			if (this.listInvoice) {
-				this.listInvoiceTemp = this.listInvoice.clone();
-			}
 
-			var headItem = this.cData.results[0].To_Items.results.filter(item => item.ItemCateg === 'ZADH');
-			var existingItem = headItem[headItem.length - 1];			
-			var efilter = "$filter=Vbeln eq '" + existingItem.DocNumber + "'";
+			// this.cData = this.getOwnerComponent().getCompData();
+			// var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
+			// var oModel = new sap.ui.model.odata.ODataModel(url, true);
+			
+
+			// this.invoice = new sap.ui.model.json.JSONModel();
+			// this.invTab = this.getView().byId("idInvoiceTab");
+
+			// this.getView().setModel(this.invoice, "invoice");
+			// // this.invTab.setModel(this.invoice);
+			
+			// this.listInvoice = this.getView().byId("idInvoiceList");
+			// if (this.listInvoice) {
+			// 	this.listInvoiceTemp = this.listInvoice.clone();
+			// }
+
+			// var headItem = this.cData.results[0].To_Items.results.filter(item => item.ItemCateg === 'ZADH');
+			// var existingItem = headItem[headItem.length - 1];			
+			// var efilter = "$filter=Vbeln eq '" + existingItem.DocNumber + "'";
 
 
-			var url = "InvoiceSet?" + "&&" + efilter;
-			var that = this;
-			this.oGloablDiaglogBox.open();
-			oModel.read(url, null, null, null,
-				function onSuccess(oData, oResponse) {
-					debugger;
-					var aSorters = that._oGroupState.groupBy("Kunrg");
-					that.oGloablDiaglogBox.close();
-					that.invoice.setData(oData.results);
-					that.invTab.getBinding("items").sort(aSorters);
-				},
-				function _onError(oError) {
-					that.oGloablDiaglogBox.close();
-				}
-			);			
+			// var url = "InvoiceSet?" + "&&" + efilter;
+			// var that = this;
+			// this.oGloablDiaglogBox.open();
+			// oModel.read(url, null, null, null,
+			// 	function onSuccess(oData, oResponse) {
+			// 		debugger;
+			// 		var aSorters = that._oGroupState.groupBy("Kunrg");
+			// 		that.oGloablDiaglogBox.close();
+			// 		that.invoice.setData(oData.results);
+			// 		that.invTab.getBinding("items").sort(aSorters);
+			// 	},
+			// 	function _onError(oError) {
+			// 		that.oGloablDiaglogBox.close();
+			// 	}
+			// );			
 		},
 		exit: function () {
 			delete this._oView;
@@ -87,9 +100,10 @@ sap.ui.define([
 					success: function (oResultData, oResponse) {
 						debugger;
 						sap.m.MessageToast.show(oResultData.Zukri);
-						var oData = that.getView().getModel("invoice").getData();
-						oData.push(oResultData);
-						that.getView().getModel("invoice").setData(oData);
+						// var oData = that.getView().getModel("invoice").getData();
+						// oData.push(oResultData);
+						// that.getView().getModel("invoice").setData(oData);
+						that.getView().getModel().refresh();
 
 					},
 					error: function (e) {
@@ -110,6 +124,9 @@ sap.ui.define([
 			debugger;
 			var oView = this._oView;
 			var oControl = this._oControl;
+
+			
+			
 
 			// }
 			if (!this._bInit) {

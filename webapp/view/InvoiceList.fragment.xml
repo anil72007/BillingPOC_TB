@@ -65,7 +65,15 @@ xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.table" xmlns:fo="sap.ui.la
 		</fo:SimpleForm>
 	</VBox>
             <FlexBox height="100px" alignItems="Start" justifyContent="Start">
-                <Table id="idInvoiceTab" width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{path: 'invoice>/'}">
+                <Table id="idInvoiceTab" width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" 
+                growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" 
+                items="{path: 'To_Invoice', sorter: [{ path: 'PayerNam',
+                     descending: false,
+                      group:true }, { path: 'Kunrg',
+                     descending: true,
+                      group:true }]
+                      
+                      }">
                     <!-- <infoToolbar>
                         <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
                             <content>
@@ -84,6 +92,12 @@ xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.table" xmlns:fo="sap.ui.la
                         <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
                             <header>
                                 <Text text="Payer" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                            </header>
+                            <footer />
+                        </Column>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                            <header>
+                                <Text text="Payer Name" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
                             </header>
                             <footer />
                         </Column>
@@ -109,11 +123,12 @@ xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.table" xmlns:fo="sap.ui.la
                     <items>
                         <ColumnListItem id="idInvoiceList" type="Active">
                             <cells>
-                                <ObjectIdentifier title="{invoice>Vbeln}" text="" titleActive="false" visible="true" />
-                                <Text text="{invoice>Kunrg}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
-                                <Text text="{invoice>Ernam}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
-                                <ObjectNumber number="{path: 'invoice>Netwr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
-                                <Text text="{path: 'invoice>Erdat', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                <ObjectIdentifier title="{Vbeln}" text="" titleActive="false" visible="true" />
+                                <Text text="{Kunrg}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                <Text text="{PayerNam}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                <Text text="{Ernam}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                <ObjectNumber number="{path: 'Netwr', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
+                                <Text text="{path: 'Erdat', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
                             </cells>
                         </ColumnListItem>
                     </items>

@@ -14,11 +14,15 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"com/sap/build/standard/pocPatientServiceAndInvoice/utils/format"
 ], function (BaseController,  MessageBox, ServiceSearch, InvoiceList, Log, Utilities, History, Export, ExportTypeCSV, Fragment, Dialog, Button, Text,format) {
 	"use strict";
-
+	this.invData = ""
 	return BaseController.extend("com.sap.build.standard.pocPatientServiceAndInvoice.controller.ServiceList", {
 		formatter: format,
+
 		handleRouteMatched: function (oEvent) {
 			
+		},
+		onAfterRendering: function(){
+			debugger;
 		},
 		onDeleteRow: function (oEvent) {
 			debugger;
@@ -191,7 +195,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				var ordID = oEvent.getParameter("arguments").OrdNumber;
 				var sPath = '/' + ordID;
 				this.getView().bindElement(sPath, {
-					expand: 'To_Items'
+					expand: 'To_Items,To_Invoice'
 				});			
 		},
 		oPopupMessage: null, oCondType: null,
@@ -283,7 +287,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			var context = oEvent.getSource().getBindingContext();
 			oDialog._oControl.setBindingContext(context);
-
 			oDialog.open();
 
 		},
