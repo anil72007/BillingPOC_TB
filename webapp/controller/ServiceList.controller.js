@@ -12,16 +12,16 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"sap/m/Button",
 	"sap/m/Text",
 	"com/sap/build/standard/pocPatientServiceAndInvoice/utils/format"
-], function (BaseController,  MessageBox, ServiceSearch, InvoiceList, Log, Utilities, History, Export, ExportTypeCSV, Fragment, Dialog, Button, Text,format) {
+], function (BaseController, MessageBox, ServiceSearch, InvoiceList, Log, Utilities, History, Export, ExportTypeCSV, Fragment, Dialog, Button, Text, format) {
 	"use strict";
 	this.invData = ""
 	return BaseController.extend("com.sap.build.standard.pocPatientServiceAndInvoice.controller.ServiceList", {
 		formatter: format,
 
 		handleRouteMatched: function (oEvent) {
-			
+
 		},
-		onAfterRendering: function(){
+		onAfterRendering: function () {
 			debugger;
 		},
 		onDeleteRow: function (oEvent) {
@@ -29,25 +29,29 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			var oTable = this.getView().byId("idtab");
 			var oSelectedItem = oEvent.getParameter("listItem");
-			var that = this;
-			this.openConfirmationDialog("Are you sure you want to delete this item?", function (result) {
-				if (result === true) {
-					oTable.removeItem(oSelectedItem);
-					var array = that.getView().getModel("main").getData().To_Items.results;
-					var value = oSelectedItem.getCells()[1].getText();
-					const index = array.findIndex(element => element["ItmNumber"] === value);
-					if (index !== -1) {
-						//   array.splice(index, 1);
-						if(that.getView().getModel("main").getData().To_Items.results[index].Mode === 'INS'){
-							that.getView().getModel("main").getData().To_Items.results.splice(index,1);
-						}else{
-							that.getView().getModel("main").getData().To_Items.results[index].Mode = 'DEL';
+			if (oEvent.getSource().getModel().getProperty(oSelectedItem.getBindingContext().sPath).BillStatus === 'C') {
+				MessageBox.error("This Item is completely Billed and cannot be deleted!!!");
+			} else {
+				var that = this;
+				this.openConfirmationDialog("Are you sure you want to delete this item?", function (result) {
+					if (result === true) {
+						oTable.removeItem(oSelectedItem);
+						var array = that.getView().getModel("main").getData().To_Items.results;
+						var value = oSelectedItem.getCells()[1].getText();
+						const index = array.findIndex(element => element["ItmNumber"] === value);
+						if (index !== -1) {
+							//   array.splice(index, 1);
+							if (that.getView().getModel("main").getData().To_Items.results[index].Mode === 'INS') {
+								that.getView().getModel("main").getData().To_Items.results.splice(index, 1);
+							} else {
+								that.getView().getModel("main").getData().To_Items.results[index].Mode = 'DEL';
+							}
 						}
+					} else {
+						// User clicked "No", do nothing
 					}
-				} else {
-					// User clicked "No", do nothing
-				}
-			});
+				});
+			}
 			// this.getView().getModel("main").refresh();
 		},
 		openConfirmationDialog: function (message, callback) {
@@ -192,11 +196,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 				);
 			}
-				var ordID = oEvent.getParameter("arguments").OrdNumber;
-				var sPath = '/' + ordID;
-				this.getView().bindElement(sPath, {
-					expand: 'To_Items,To_Invoice'
-				});			
+			var ordID = oEvent.getParameter("arguments").OrdNumber;
+			var sPath = '/' + ordID;
+			this.getView().bindElement(sPath, {
+				expand: 'To_Items,To_Invoice'
+			});
 		},
 		oPopupMessage: null, oCondType: null,
 		onSaveItems: function (oEvent) {
