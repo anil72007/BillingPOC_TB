@@ -39,6 +39,15 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					mBindingParams.filters.push(newFilter);
 				}
 			}
+
+			if(this.getView().byId("DP1").getDateValue()){
+				mBindingParams.filters.push(new Filter("ValidFrom", FilterOperator.EQ, this.getView().byId("DP1").getDateValue()));
+			}
+			if(this.getView().byId("DP2").getDateValue()){
+				mBindingParams.filters.push(new Filter("ValidTo", FilterOperator.EQ, this.getView().byId("DP2").getDateValue()));
+			}
+
+
 		},
 		toggleUpdateMode: function() {
 			var oButton = this.getView().byId("toggleUpdateMode");

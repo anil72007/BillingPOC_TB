@@ -134,6 +134,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			});
 		},
 		onNavBack: function () {
+			this.getView().getModel().refresh();
 			this.getOwnerComponent().setCompData([]);
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
@@ -179,7 +180,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var url = "GetCaseDataSet?$expand=To_ItemCond,To_Items,To_Movement,To_Message" + "&&" + efilter;
 
 			var that = this;
-
+			
 			if (!this.getOwnerComponent().getCompData().results) {
 				// if (this.getOwnerComponent().getCompData().results.length === 0) {
 				this.oGloablDiaglogBox.open();

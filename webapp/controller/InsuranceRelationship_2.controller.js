@@ -70,18 +70,18 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 							var tMod = new sap.ui.model.json.JSONModel();
 							tMod.setData(oData.results)
 							that.getView().byId("DP1").setModel(tMod);
-							that.getView().byId("DP1").setEnabled(false);
+							// that.getView().byId("DP1").setEnabled(false);
 							that.getView().byId("DP1").bindProperty("value", {
 								path: "/0/ValidFrom",
 								type: new sap.ui.model.type.Date()
 							});
 							that.getView().byId("DP2").setModel(tMod);
-							that.getView().byId("DP2").setEnabled(false);
+							// that.getView().byId("DP2").setEnabled(false);
 							that.getView().byId("DP2").bindProperty("value", {
 								path: "/0/ValidTo",
 								type: new sap.ui.model.type.Date()
 							});
-							that.getView().byId("DP2").setEnabled(false);
+							// that.getView().byId("DP2").setEnabled(false);
 							that.getView().byId("idContType").setVisible(false);
 							for (var i = 0; i < oData.results.length; i++) {
 								if (oData.results[i].CondType === 'ZCO%') {
@@ -129,6 +129,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		clearValues: function(){
 			this.getView().byId("insno").setValue("");
+			this.getView().byId("insno").setEnabled(true);
 			this.getView().byId("insno").setDescription("");
 			this.getView().byId("rank").setValue("");
 			this.getView().byId("DP1").setModel(null);
@@ -151,7 +152,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.getView().byId("idMainInsChk").setSelected(false);
 
 			this.getView().getModel("addlServ").setData([]);
+			this.getView().byId("idContType").setVisible(true);
 			// this.getView().byId("idInsCond").unbindItems();
+			this.aufnr = "";
+			this.vbeln = "";
 		},
 		 clearControls: function(oControl) {
 			// Clear any bindings on the control

@@ -156,12 +156,19 @@ xmlns:l="sap.ui.layout" xmlns:f="sap.ui.table">
                             </header>
                             <footer />
                         </Column>
+                        <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false" visible="false">
+                            <header>
+                                <Text text="Material Group" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="false" />
+                            </header>
+                            <footer />
+                        </Column>
                     </columns>
                     <items>
                         <ColumnListItem id="idListSrcSearch" type="Active">
                             <cells>
                                 <ObjectIdentifier title="{Object}" text="" titleActive="false" visible="true" />
                                 <Text text="{Objecttext}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                <Text text="{MatlGrp}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="false" />
                             </cells>
                         </ColumnListItem>
                     </items>

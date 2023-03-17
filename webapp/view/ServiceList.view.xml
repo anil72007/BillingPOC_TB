@@ -1,7 +1,7 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.ServiceList" xmlns="sap.m" xmlns:unified="sap.ui.unified" xmlns:layout="sap.ui.layout">
     <Page title="Detail Page" showHeader="true" showFooter="true" showNavButton="true" navButtonPress="onNavBack">
         <content>
-            <ObjectHeader intro="{CaseType}" title="{NameFirst} {/NameLast}" icon="sap-icon://person-placeholder" 
+            <ObjectHeader intro="{CaseTypeDesc}" title="{NameFirst} {/NameLast}" icon="sap-icon://person-placeholder" 
             number="{CaseOrder}" numberUnit="{PatientId}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
                 <attributes>
                     <ObjectAttribute title="Age" text="{path: 'Age'}" active="false" visible="true"/>

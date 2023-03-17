@@ -18,6 +18,7 @@ sap.ui.define([
 		},
 		onInit: function () {
 			debugger;
+			this.idMatGrpTab = "";
 			this._oDialog = this.getControl();
 			this.cData = this.getOwnerComponent().getCompData();
 
@@ -271,7 +272,7 @@ sap.ui.define([
 						itemUpd[0].NetValue = tPrice.toString();
 						that.getView().getModel("main").refresh();
 
-						var oTable = that.getView().byId("idtab");
+						var oTable = that.getView().byId(that.idMatGrpTab);
 						var oContext = oTable.getBindingContext();
 
 						// Get the binding object of your table
@@ -339,9 +340,22 @@ sap.ui.define([
 				// 	// Add the CSS class to the new row
 				// 	selectedRow.addStyleClass("highlighted-row");
 				//   });
-
-
-				this.getView().byId("idtab").addItem(columnListItemNewLine);
+				
+				if(this.getView().byId("idSrcSearch").getSelectedItems()[i].getCells()[2].getText() === 'OSS000000'){
+					this.idMatGrpTab = "idtab";
+				}else if(this.getView().byId("idSrcSearch").getSelectedItems()[i].getCells()[2].getText() === 'OSB000000'){
+					this.idMatGrpTab = "idRoomChg";
+				}else if(this.getView().byId("idSrcSearch").getSelectedItems()[i].getCells()[2].getText() === 'RAWMAT1'){
+					this.idMatGrpTab = "idConsumable";
+				}else if(this.getView().byId("idSrcSearch").getSelectedItems()[i].getCells()[2].getText() === 'RAWMAT2'){
+					this.idMatGrpTab = "idConsumable";
+				}else if(this.getView().byId("idSrcSearch").getSelectedItems()[i].getCells()[2].getText() === 'OSC000000'){
+					this.idMatGrpTab = "idExamination";
+				}
+				if(this.idMatGrpTab){
+					this.getView().byId(this.idMatGrpTab).addItem(columnListItemNewLine);
+				}
+				
 
 			}
 			this.getView().getModel("main").setData(oData);

@@ -172,7 +172,7 @@
                                 </items>
                                 <layoutData />
                             </HBox>
-                            <Table width="400px" noDataText="" mode="None" id="idInsCond" showSeparators="All" growing="true" 
+                            <Table width="400px" noDataText="" mode="SingleSelectLeft" id="idInsCond" showSeparators="All" growing="true" 
                             growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" items="{path: 'addlServ>/'}">
                                 <infoToolbar />
                                 <!-- <headerToolbar>
