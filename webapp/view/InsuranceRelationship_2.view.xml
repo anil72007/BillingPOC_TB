@@ -25,7 +25,8 @@
                     <Input id="insno" value="" showValueHelp="true" valueHelpRequest="searchBP" width="auto" />
                     <!-- <Text text="" /> -->
                     <Label text="Contract Scheme" labelFor="idContType" />
-                    <ComboBox id="idContType" selectedKey="Ordinary" editable="true" enabled="true" visible="true" width="108px" valueState="None" maxWidth="100%" selectionChange="onSelectionChange">
+                    <ComboBox id="idContType" selectedKey="Ordinary" editable="true" 
+                    enabled="true" visible="true" width="108px" valueState="None" maxWidth="100%" selectionChange="onSelectionChange">
                         <!-- <items>
                             <core:Item text="Ordinary Contract" enabled="true" key="Ordinary Contract" />
                             <core:Item text="Special Contract" enabled="true" key="Special Contract" />

@@ -101,10 +101,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 							var button = that.getView().byId("idActInd");
 							if (oData.results[0].ActiveInd) {
+								button.setPressed(true);
 								button.setIcon("sap-icon://status-positive");
 								button.setText("Active");
 								button.addStyleClass("active");
 							  } else {
+								button.setPressed(false);
 								button.setIcon("sap-icon://status-negative");
 								button.setText("Inactive");
 								button.removeStyleClass("active");
@@ -165,6 +167,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 			this.getView().getModel("addlServ").setData([]);
 			this.getView().byId("idContType").setVisible(true);
+			this.getView().byId("idActInd").setPressed(false);
 			// this.getView().byId("idInsCond").unbindItems();
 			this.aufnr = "";
 			this.vbeln = "";
@@ -636,6 +639,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			debugger;
 			this.aufnr = "";this.vbeln = "";
 			this.actInd = false;
+
+			// this.getView().byId("idActInd").addStyleClass("active");
 			this.oGloablDiaglogBox = new sap.m.BusyDialog();
 			this.contdata = new sap.ui.model.json.JSONModel();
 			this.getView().setModel(this.contdata, "contdata");
