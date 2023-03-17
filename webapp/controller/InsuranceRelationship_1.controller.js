@@ -138,6 +138,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 
 		_onPageNavButtonPress: function () {
+			// this.getView().byId("idInsuranceTab").removeAllItems();
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 			var oQueryParams = this.getQueryParameters(window.location);

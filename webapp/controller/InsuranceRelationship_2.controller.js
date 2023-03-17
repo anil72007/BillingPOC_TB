@@ -98,6 +98,18 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 							const exCond = ['ZCO%', 'ZCOF', 'ZDC%', 'ZDCF'];
 							const exCondArr = tMod.getData().filter(item => !exCond.includes(item.CondType));
 							that.getView().getModel("addlServ").setData(exCondArr);
+
+							var button = that.getView().byId("idActInd");
+							if (oData.results[0].ActiveInd) {
+								button.setIcon("sap-icon://status-positive");
+								button.setText("Active");
+								button.addStyleClass("active");
+							  } else {
+								button.setIcon("sap-icon://status-negative");
+								button.setText("Inactive");
+								button.removeStyleClass("active");
+							  }
+							  that.actInd = that.getView().byId("idActInd");							
 						},
 						function _onError(oError) {
 							// that.oGloablDiaglogBox.close();
