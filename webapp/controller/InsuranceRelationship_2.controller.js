@@ -111,7 +111,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 								button.setText("Inactive");
 								button.removeStyleClass("active");
 							  }
-							  that.actInd = that.getView().byId("idActInd");							
+							  that.actInd = that.getView().byId("idActInd");	
+							  that.getView().byId("idMainInsChk").setSelected(oData.results[0].MainIns)	;				
 						},
 						function _onError(oError) {
 							// that.oGloablDiaglogBox.close();
