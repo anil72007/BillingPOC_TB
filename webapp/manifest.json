@@ -79,7 +79,7 @@
             "": {
                 "dataSource": "local",
                 "type": "sap.ui.model.odata.v2.ODataModel",
-                "settings": { "defaultCountMode": "Inline"}
+                "settings": { }
             },
             "resources": {
                 "css": [{

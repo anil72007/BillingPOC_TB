@@ -78,6 +78,7 @@ sap.ui.define([
 
 				}
 			);
+			this.getView().getModel().refresh();
 		},
 		exit: function () {
 			delete this._oView;
@@ -198,7 +199,10 @@ sap.ui.define([
 			var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
 			var oModel = new sap.ui.model.odata.ODataModel(url, true);
 
-
+			if(this.getView().byId("idMovement").getSelectedItems().length === 0){
+				MessageBox.error("Please select the Movement for adding the Line Item");
+				return;
+			}
 			var addItems = this.getView().byId("idSrcSearch").getSelectedItems();
 			var headItem = this.getView().getModel("main").getData().To_Items.results.filter(item => item.ItemCateg === 'ZADH');
 

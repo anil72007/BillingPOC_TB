@@ -200,7 +200,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var ordID = oEvent.getParameter("arguments").OrdNumber;
 			var sPath = '/' + ordID;
 			this.getView().bindElement(sPath, {
-				expand: 'To_Items,To_Invoice'
+				expand: 'To_Items'
 			});
 		},
 		oPopupMessage: null, oCondType: null,
