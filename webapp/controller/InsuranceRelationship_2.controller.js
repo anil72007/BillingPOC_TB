@@ -67,6 +67,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 							that.getView().byId("insno").setValue(oData.results[0].Payer);
 							that.getView().byId("insno").setDescription(oData.results[0].Name);
 							// that.getView().byId("DP1").setProperty("value", new Date(oData.results[0].ValidFrom))
+							that.getView().byId("idControlNo").setValue(oData.results[0].ControlNo);
 							var tMod = new sap.ui.model.json.JSONModel();
 							tMod.setData(oData.results)
 							that.getView().byId("DP1").setModel(tMod);
@@ -105,13 +106,15 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 								button.setIcon("sap-icon://status-positive");
 								button.setText("Active");
 								button.addStyleClass("active");
+								that.actInd = true;
 							  } else {
 								button.setPressed(false);
 								button.setIcon("sap-icon://status-negative");
 								button.setText("Inactive");
 								button.removeStyleClass("active");
+								that.actInd = false;
 							  }
-							  that.actInd = that.getView().byId("idActInd");	
+							  that.getView().byId("rank").setValue(oData.results[0].Rank)
 							  that.getView().byId("idMainInsChk").setSelected(oData.results[0].MainIns)	;				
 						},
 						function _onError(oError) {
@@ -152,7 +155,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.getView().byId("DP1").setValue("");
 
 			this.getView().byId("DP2").setValue("");
-			
+			this.getView().byId("idControlNo").setValue("");
 			this.getView().byId("idContType").setSelectedItem(null);
 			this.getView().byId("idTabCovPer").setValue("");
 			this.getView().byId("idTabCovAmt").setValue("");
@@ -167,6 +170,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.getView().byId("idMainInsChk").setSelected(false);
 
 			this.getView().getModel("addlServ").setData([]);
+			this.getView().byId("idInsCond").getModel().refresh();
+
+			this.getView().byId("idInsCond").removeAllItems();
 			this.getView().byId("idContType").setVisible(true);
 			this.getView().byId("idActInd").setPressed(false);
 			// this.getView().byId("idInsCond").unbindItems();
@@ -418,6 +424,15 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		_onButtonPress3: function (oEvent) {
 
 			debugger;
+
+			if(!this.getView().byId("DP1").getDateValue() || !this.getView().byId("DP2").getDateValue()){
+				MessageBox.error("Valid From and Valid To fields cannot be left blank!!!");
+				return;
+			}
+			if(this.getView().byId("DP2").getDateValue() < this.getView().byId("DP1").getDateValue()){
+				MessageBox.error("Valid To date is less than valid from! Please correct the error");
+				return;
+			}
 			var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
 			var oModel = new sap.ui.model.odata.ODataModel(url, true);
 
@@ -433,7 +448,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				"Rank": this.getView().byId("rank").getValue(),
 				"Text": "",
 				"ActiveInd": this.actInd,
-				"ControlNo": "",
+				"ControlNo": this.getView().byId("idControlNo").getValue(),
 				"Payer": this.getView().byId("insno").getValue(),
 				"Name": "",
 				"MainIns": this.getView().byId("idMainInsChk").getSelected(),
@@ -461,43 +476,54 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				}
 				this.hData.Ins_ToCond.push(itemData);
 			}
-			var itemData = {
-				"Aufnr": this.aufnr,
-				"Vbeln": this.vbeln,
-				"ValidFrom": this.getView().byId("DP1").getDateValue(),
-				"ValidTo": this.getView().byId("DP2").getDateValue(),
-				"CondType": "ZCO%",
-				"CondValue": this.getView().byId("idTabCovPer").getValue()
+			if(this.getView().byId("idTabCovPer").getValue() !== ""){
+				var itemData = {
+					"Aufnr": this.aufnr,
+					"Vbeln": this.vbeln,
+					"ValidFrom": this.getView().byId("DP1").getDateValue(),
+					"ValidTo": this.getView().byId("DP2").getDateValue(),
+					"CondType": "ZCO%",
+					"CondValue": this.getView().byId("idTabCovPer").getValue()
+				}
+				this.hData.Ins_ToCond.push(itemData);
 			}
-			this.hData.Ins_ToCond.push(itemData);
-
-			var itemData = {
-				"Aufnr": this.aufnr,
-				"Vbeln": this.vbeln,
-				"ValidFrom": this.getView().byId("DP1").getDateValue(),
-				"ValidTo": this.getView().byId("DP2").getDateValue(),
-				"CondType": "ZCOF",
-				"CondValue": this.getView().byId("idTabCovAmt").getValue()
+			
+			if(this.getView().byId("idTabCovAmt").getValue() !== ""){
+				var itemData = {
+					"Aufnr": this.aufnr,
+					"Vbeln": this.vbeln,
+					"ValidFrom": this.getView().byId("DP1").getDateValue(),
+					"ValidTo": this.getView().byId("DP2").getDateValue(),
+					"CondType": "ZCOF",
+					"CondValue": this.getView().byId("idTabCovAmt").getValue()
+				}
+				this.hData.Ins_ToCond.push(itemData);
 			}
-			this.hData.Ins_ToCond.push(itemData);
-			var itemData = {
-				"Aufnr": this.aufnr,
-				"Vbeln": this.vbeln,
-				"ValidFrom": this.getView().byId("DP1").getDateValue(),
-				"ValidTo": this.getView().byId("DP2").getDateValue(),
-				"CondType": "ZDC%",
-				"CondValue": this.getView().byId("idTabDisPer").getValue()
+			
+			if(this.getView().byId("idTabDisPer").getValue() !== ""){
+				var itemData = {
+					"Aufnr": this.aufnr,
+					"Vbeln": this.vbeln,
+					"ValidFrom": this.getView().byId("DP1").getDateValue(),
+					"ValidTo": this.getView().byId("DP2").getDateValue(),
+					"CondType": "ZDC%",
+					"CondValue": this.getView().byId("idTabDisPer").getValue()
+				}
+				this.hData.Ins_ToCond.push(itemData);
 			}
-			this.hData.Ins_ToCond.push(itemData);
-			var itemData = {
-				"Aufnr": this.aufnr,
-				"Vbeln": this.vbeln,
-				"ValidFrom": this.getView().byId("DP1").getDateValue(),
-				"ValidTo": this.getView().byId("DP2").getDateValue(),
-				"CondType": "ZDCF",
-				"CondValue": this.getView().byId("idTabDisAmt").getValue()
+			
+			if(this.getView().byId("idTabDisAmt").getValue() !== ""){
+				var itemData = {
+					"Aufnr": this.aufnr,
+					"Vbeln": this.vbeln,
+					"ValidFrom": this.getView().byId("DP1").getDateValue(),
+					"ValidTo": this.getView().byId("DP2").getDateValue(),
+					"CondType": "ZDCF",
+					"CondValue": this.getView().byId("idTabDisAmt").getValue()
+				}
+				this.hData.Ins_ToCond.push(itemData);
 			}
-			this.hData.Ins_ToCond.push(itemData);
+			
 
 			var msg = {
 				"Type" : "S",

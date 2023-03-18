@@ -32,6 +32,8 @@
                             <core:Item text="Special Contract" enabled="true" key="Special Contract" />
                         </items> -->
                     </ComboBox>
+                    <Label text="Control No" labelFor="insno" />
+                    <Input id="idControlNo" value="" showValueHelp="false" valueHelpRequest="searchBP" width="auto" />
                     <core:Title text="Validity" />
                     <Label text="Valid From" labelFor="DP1" />
                     <DatePicker
@@ -169,7 +171,7 @@
                                 <items>
                                     <Button text="" type="Default" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onAddCond" />
                                     <ToolbarSpacer width="20px" />
-                                    <Button text="" type="Default" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" />
+                                    <!-- <Button text="" type="Default" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" /> -->
                                 </items>
                                 <layoutData />
                             </HBox>
