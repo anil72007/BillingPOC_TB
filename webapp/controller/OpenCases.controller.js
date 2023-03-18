@@ -47,7 +47,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				mBindingParams.filters.push(new Filter("ValidTo", FilterOperator.EQ, this.getView().byId("DP2").getDateValue()));
 			}
 
-
+			mBindingParams.filters.push(new Filter("Mode", FilterOperator.EQ, 'GET'));
 		},
 		toggleUpdateMode: function() {
 			var oButton = this.getView().byId("toggleUpdateMode");

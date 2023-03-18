@@ -52,7 +52,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				};
 				this.getView().bindObject(oPath);
 			}
-			this.getView().getModel().refresh();
+			
 		},
 		onSubmitButtonPressed: function (oEvent) {
 			debugger;
@@ -139,6 +139,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		_onPageNavButtonPress: function () {
 			// this.getView().byId("idInsuranceTab").removeAllItems();
+			this.getView().getModel().refresh();
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 			var oQueryParams = this.getQueryParameters(window.location);

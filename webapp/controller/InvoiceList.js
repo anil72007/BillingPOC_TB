@@ -125,9 +125,6 @@ sap.ui.define([
 			var oView = this._oView;
 			var oControl = this._oControl;
 
-			
-			
-
 			// }
 			if (!this._bInit) {
 				this.oGloablDiaglogBox = new sap.m.BusyDialog();

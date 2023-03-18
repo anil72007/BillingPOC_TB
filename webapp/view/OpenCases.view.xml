@@ -54,7 +54,7 @@
                             />
                         </smartFilterBar:customControl>
                     </smartFilterBar:ControlConfiguration>
-                    <smartFilterBar:ControlConfiguration key="CustomFilterField" index="2" label="Billing Status" groupId="_BASIC_1" width="300px" visibleInAdvancedArea="true">
+                    <smartFilterBar:ControlConfiguration key="CustomFilterField" index="2" label="Billing Status" groupId="_BASIC_1" width="auto" visibleInAdvancedArea="true">
                         <smartFilterBar:customControl>
                             <MultiComboBox id="multiComboBox" customData:hasValue="true">
                                 <core:Item key="1" text="Final Bill" />
@@ -65,7 +65,19 @@
                             valueHelpOnly="true" required="false" valueStateText="Invalid entry" maxLength="0"/>                             -->
                         </smartFilterBar:customControl>
                     </smartFilterBar:ControlConfiguration>
-                    <smartFilterBar:ControlConfiguration key="CustomFilterField_1" index="4" label="Case Type" groupId="_BASIC_1" width="300px" visibleInAdvancedArea="true">
+
+                    <smartFilterBar:ControlConfiguration key="CustomFilterField_4" index="4" label="Case Status" groupId="_BASIC_1" 
+                    width="auto" visibleInAdvancedArea="true">
+                        <smartFilterBar:customControl>
+                            <MultiComboBox id="idCaseStatus" customData:hasValue="true" >
+                                <!-- <core:Item key="{KSCHL}" text="{VTEXT}" /> items="{ path: '/GetConditionTypeSet'}"-->
+                                <core:Item key="CRTD" text="Created" />
+                            </MultiComboBox>
+
+                        </smartFilterBar:customControl>
+                    </smartFilterBar:ControlConfiguration>
+
+                    <smartFilterBar:ControlConfiguration key="CustomFilterField_1" index="4" label="Case Type" groupId="_BASIC_1" width="auto" visibleInAdvancedArea="true">
                         <smartFilterBar:customControl>
                             <MultiComboBox id="idMovement" customData:hasValue="true">
                                 <core:Item key="ZADM" text="Admission" />
@@ -117,6 +129,7 @@
                 persistencyKey="SmartTableAnalytical_Explored"
                 demandPopin="true"
                 beforeRebindTable="onBeforeRebindTable"
+                
             >
                 <Table mode="SingleSelectMaster" itemPress="onItemPressSupp" growingThreshold="20" growing="true" growingScrollToLoad="true">
                     <columns>
