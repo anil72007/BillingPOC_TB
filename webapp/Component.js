@@ -8,6 +8,7 @@ sap.ui.define([
 	"use strict";
 
 	var sData = [];
+	this.itemNo  = "";
 	var navigationWithContext = {
 		"CaseSet": {
 			"ServiceList": "",
@@ -101,7 +102,12 @@ sap.ui.define([
 			}
 			return this._sContentDensityClass;
 		},
-
+		setItem: function(itemData){
+			this.itemNo = itemData;
+		},
+		getItem: function(){
+			return this.itemNo;
+		},
 		getNavigationPropertyForNavigationWithContext: function(sEntityNameSet, targetPageName) {
 			var entityNavigations = navigationWithContext[sEntityNameSet];
 			return entityNavigations == null ? null : entityNavigations[targetPageName];

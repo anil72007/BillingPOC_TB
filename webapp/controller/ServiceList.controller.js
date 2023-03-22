@@ -22,12 +22,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		onAfterRendering: function () {
-			debugger;
+
 		},
 		onDeleteRow: function (oEvent) {
-			debugger;
 
-			var oTable = this.getView().byId("idtab");
+			var oTable = oEvent.getSource();
 			var oSelectedItem = oEvent.getParameter("listItem");
 			if (oEvent.getSource().getModel().getProperty(oSelectedItem.getBindingContext().sPath).BillStatus === 'C') {
 				MessageBox.error("This Item is completely Billed and cannot be deleted!!!");
@@ -40,7 +39,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						var value = oSelectedItem.getCells()[1].getText();
 						const index = array.findIndex(element => element["ItmNumber"] === value);
 						if (index !== -1) {
-							//   array.splice(index, 1);
+							
 							if (that.getView().getModel("main").getData().To_Items.results[index].Mode === 'INS') {
 								that.getView().getModel("main").getData().To_Items.results.splice(index, 1);
 							} else {
@@ -159,11 +158,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		getCaseItemData: function (oEvent) {
-			debugger;
+
 			var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
 			var oModel = new sap.ui.model.odata.ODataModel(url, true);
 
-			// var oDataModel = this.getView().getModel(); // Model used for triggering the Odata Request
+			
 			const str = oEvent.getParameters().arguments.OrdNumber;
 			const start = str.indexOf("'") + 1; // finds the index of the first single quote and adds 1 to skip it
 			const end = str.lastIndexOf("'"); // finds the index of the last single quote
@@ -180,13 +179,17 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var url = "GetCaseDataSet?$expand=To_ItemCond,To_Items,To_Movement,To_Message" + "&&" + efilter;
 
 			var that = this;
-			
+
 			if (!this.getOwnerComponent().getCompData().results) {
-				// if (this.getOwnerComponent().getCompData().results.length === 0) {
+				
 				this.oGloablDiaglogBox.open();
 				oModel.read(url, null, { filters: aFilters }, null,
 					function onSuccess(oData, oResponse) {
 						that.oGloablDiaglogBox.close();
+						if (oData.results.length === 0) {
+							MessageBox.error("Error while fetching Data!!!");
+							that.onNavBack();
+						}
 						that.getOwnerComponent().setCompData(oData);
 						that.getView().getModel("main").setData(oData.results[0]);
 
@@ -202,10 +205,39 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.getView().bindElement(sPath, {
 				expand: 'To_Items'
 			});
+
+			if (this.getOwnerComponent().getItem() !== "") {
+				this.setPrice(this.getView().byId("idtab"), this.getOwnerComponent().getItem());
+				this.setPrice(this.getView().byId("idRoomChg"), this.getOwnerComponent().getItem());
+				this.setPrice(this.getView().byId("idConsumable"), this.getOwnerComponent().getItem());
+				this.setPrice(this.getView().byId("idMedication"), this.getOwnerComponent().getItem());
+				this.setPrice(this.getView().byId("idExamination"), this.getOwnerComponent().getItem());
+				this.setPrice(this.getView().byId("idClinical"), this.getOwnerComponent().getItem());
+
+				this.getOwnerComponent().setItem("");
+			}
+		},
+		setPrice(oTable, tItem) {
+			var oContext = oTable.getBindingContext();
+
+			// Get the binding object of your table
+			var oBinding = oTable.getBinding("items");
+			for (var j = 0; j < oTable.getItems().length; j++) {
+				if (!oTable.getItems()[j].isGroupHeader()) {
+					if (oTable.getItems()[j].getCells()[1].getText() === tItem) {
+						var tPrice = 0;
+						var tData = this.getOwnerComponent().getCompData().results[0].To_ItemCond.results.filter(item => item.ItmNumber === tItem);
+						for (var i = 0; i < tData.length; i++) {
+							tPrice = tPrice + parseInt(tData[i].CondValue);
+						}
+						oTable.getItems()[j].getCells()[5].setNumber(tPrice);
+					}
+				}
+			}
 		},
 		oPopupMessage: null, oCondType: null,
 		onSaveItems: function (oEvent) {
-			debugger;
+
 			var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
 			var oModel = new sap.ui.model.odata.ODataModel(url, true);
 
@@ -232,8 +264,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 						beginButton: new sap.m.Button({
 							text: "OK",
 							press: function () {
-								// that.getView().getModel().refresh();
-								// var oWindow = sap.ui.getCore().getWindow();
+								
 								window.location.reload();
 								that.popupView.destroy();
 								dialog.close();
@@ -312,7 +343,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		_onMenuItemPress: function (oEvent) {
-			debugger;
+
 			var cData = this.getOwnerComponent().getCompData();
 			if (cData.results[0].To_Items.results[0].DocNumber) {
 				this.data = { "Vbeln": cData.results[0].To_Items.results[0].DocNumber };
@@ -323,13 +354,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				oModel.create("/InvoiceSet", this.data, {
 					method: "POST",
 					success: function (oResultData, oResponse) {
-						debugger;
+
 						sap.m.MessageToast.show(oResultData.Ktext);
 
 
 					},
 					error: function (e) {
-						debugger;
+
 						sap.m.MessageToast.show("Error while creating Invoice");
 
 
@@ -385,14 +416,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					}.bind(this));
 				}
 			} else {
-				// this.oRouter.navTo("ConditionDetails");
-
-				// var sPath = oEvent.getParameter("listItem").getBindingContextPath();
-				// if(sPath){
-				// 	var ItmNumber = oEvent.getSource().getModel().getProperty(sPath).ItmNumber
-				// }else{
-
-				// }
+				
 				if (sRouteName === "InsuranceRelationship_1") {
 					this.oRouter.navTo(sRouteName, {
 						context: sPath,
@@ -525,12 +549,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 
 		onInit: function () {
-			// debugger;
+			// 
 			history.pushState(null, null, location.href);
 			var that = this;
 			window.onpopstate = function () {
 				if (location.pathname === '/index.html') {
-					// that.getOwnerComponent().setCompData([]);
+					
 				}
 			};
 			this.adminChg = this.getView().byId("idtab");
@@ -539,10 +563,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.medication = this.getView().byId("idMedication");
 			this.examination = this.getView().byId("idExamination");
 
-			// this.listitem = this.getView().byId("listitem");
-			// if (this.listitem) {
-			// 	this.oTemplate = this.listitem.clone();
-			// }
+			
 			this.oDataSer = new sap.ui.model.json.JSONModel();
 
 			this.getView().setModel(this.oDataSer, "main");
@@ -555,23 +576,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.ordData = "";
 			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.oRouter.getRoute("ServiceList1").attachMatched(this.getCaseItemData, this);
-			// this.oRouter.getRoute("ServiceList2").attachMatched(this.getCaseItemData, this);
+			
 			this.oGloablDiaglogBox = new sap.m.BusyDialog();
-			// this.oRouter.getTarget("ServiceList").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
-			// var oView = this.getView();
-			// oView.addEventDelegate({
-			// 	onBeforeShow: function() {
-			// 		if (sap.ui.Device.system.phone) {
-			// 			var oPage = oView.getContent()[0];
-			// 			if (oPage.getShowNavButton && !oPage.getShowNavButton()) {
-			// 				oPage.setShowNavButton(true);
-			// 				oPage.attachNavButtonPress(function() {
-			// 					this.oRouter.navTo("CaseList", {}, true);
-			// 				}.bind(this));
-			// 			}
-			// 		}
-			// 	}.bind(this)
-			// });
+
 
 		},
 		onExit: function () {

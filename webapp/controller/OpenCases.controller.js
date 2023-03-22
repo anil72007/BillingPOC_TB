@@ -12,7 +12,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		_oModel: null,
 
         onInit: function(){
-            // this._oModel = new ODataModel("LineItemsSet", true);
+            
 			this.oRouter = this.getOwnerComponent().getRouter();
 			this.getView().setModel(this.getOwnerComponent().getModel());
 			
@@ -20,16 +20,18 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
         },
 		
 		onBeforeRebindTable: function (oEvent) {
-			debugger;
+			
 			var mBindingParams = oEvent.getParameter("bindingParams");
-			// var oMultiComboBox = this.getView().byId("multiComboBox");
-			// var aCountKeys = oMultiComboBox.getSelectedKeys();
-			// for (var i = 0; i < aCountKeys.length; i++) {
-			// 	var newFilter = new Filter("CaseType", FilterOperator.EQ, aCountKeys[i]);
-			// 	if (aCountKeys.length > 0) {
-			// 		mBindingParams.filters.push(newFilter);
-			// 	}
-			// }
+
+			var idCaseStatus = this.getView().byId("idCaseStatus");
+			var aCountKeys = idCaseStatus.getSelectedKeys();
+			for (var i = 0; i < aCountKeys.length; i++) {
+				var newFilter = new Filter("CaseStatus", FilterOperator.EQ, aCountKeys[i]);
+				if (aCountKeys.length > 0) {
+					mBindingParams.filters.push(newFilter);
+				}
+			}
+
 
 			var idMovement = this.getView().byId("idMovement");
 			var aCountKeys = idMovement.getSelectedKeys();
@@ -66,11 +68,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this._smartFilterBar.setLiveMode(!bLiveMode);
 		},
 		onItemPressSupp: function(oEvent){
-			debugger;
+			
 
 			var sPath = oEvent.getParameter("listItem").getBindingContextPath();
 			var myId = sPath.split("/")[sPath.split("/").length - 1];
-			// var myId = oEvent.getParameter("listItem").getBindingContext().getModel().oData[oEvent.getParameter("listItem").getBindingContext().getPath().substring(1)].CaseOrder;
+			
 
 			this.oRouter.navTo("ServiceList1",{
 				OrdNumber : myId

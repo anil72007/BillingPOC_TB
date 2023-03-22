@@ -8,7 +8,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 	return BaseController.extend("com.sap.build.standard.pocPatientServiceAndInvoice.controller.InsuranceRelationship_1", {
 		handleRouteMatched: function (oEvent) {
-			debugger;
+			
 			var sAppId = "App6352534280e30701c54b4b6b";
 
 			var oParams = {};
@@ -36,15 +36,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				}
 			}
 
-			// if (!this.sContext) {
-			// 	this.sContext = "InsuranceSet('IN1')";
-			// }
-
 			var oPath;
-			// var sPath = '/' + this.sContext;
-			// this.getView().bindElement(sPath, {
-			// 	expand: 'To_InsuranceHeader'
-			// });
 			if (this.sContext) {
 				oPath = {
 					path: "/" + this.sContext,
@@ -55,7 +47,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			
 		},
 		onSubmitButtonPressed: function (oEvent) {
-			debugger;
+			
 			var oBindingContext = oEvent.getSource().getBindingContext();
 
 			return new Promise(function (fnResolve) {
@@ -68,12 +60,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			});
 		},
 		onItemPressSupp: function (oEvent) {
-			debugger;
+			
 			var oBindingContext = oEvent.getSource().getBindingContext();
 
 			var sPath = oEvent.getParameter("listItem").getBindingContextPath();
 			var myId = sPath.split("/")[sPath.split("/").length - 1];
-			// var myId = oEvent.getParameter("listItem").getBindingContext().getModel().oData[oEvent.getParameter("listItem").getBindingContext().getPath().substring(1)].CaseOrder;
 
 			this.oRouter.navTo("InsuranceRelationship_3", {
 				VBELN: myId
@@ -138,8 +129,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 
 		_onPageNavButtonPress: function () {
-			// this.getView().byId("idInsuranceTab").removeAllItems();
-			this.getView().getModel().refresh();
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 			var oQueryParams = this.getQueryParameters(window.location);
@@ -484,7 +473,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		onInit: function () {
-			debugger;
+			
 			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.oRouter.getTarget("InsuranceRelationship_1").attachDisplay(jQuery.proxy(this.handleRouteMatched, this));
 			var oView = this.getView();
@@ -565,7 +554,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		onSelectMainIns: function (oEvent) {
-			debugger;
+			
 			var oTable = this.getView().byId("idInsuranceTab");
 			var oCheckBox = oEvent.getSource();
 			var oModel = oTable.getModel();

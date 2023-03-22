@@ -11,7 +11,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	return BaseController.extend("com.sap.build.standard.pocPatientServiceAndInvoice.controller.InsuranceRelationship_2", {
 		formatter: format,
 		handleRouteMatched: function (oEvent) {
-			debugger;
+			
 			var sAppId = "App6352534280e30701c54b4b6b";
 
 			var oParams = {};
@@ -62,27 +62,27 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 					oModel.read(url, null, null, null,
 						function onSuccess(oData, oResponse) {
-							debugger;
+							
 							that.getView().byId("insno").setEnabled(false);
 							that.getView().byId("insno").setValue(oData.results[0].Payer);
 							that.getView().byId("insno").setDescription(oData.results[0].Name);
-							// that.getView().byId("DP1").setProperty("value", new Date(oData.results[0].ValidFrom))
+
 							that.getView().byId("idControlNo").setValue(oData.results[0].ControlNo);
 							var tMod = new sap.ui.model.json.JSONModel();
 							tMod.setData(oData.results)
 							that.getView().byId("DP1").setModel(tMod);
-							// that.getView().byId("DP1").setEnabled(false);
+
 							that.getView().byId("DP1").bindProperty("value", {
 								path: "/0/ValidFrom",
 								type: new sap.ui.model.type.Date()
 							});
 							that.getView().byId("DP2").setModel(tMod);
-							// that.getView().byId("DP2").setEnabled(false);
+
 							that.getView().byId("DP2").bindProperty("value", {
 								path: "/0/ValidTo",
 								type: new sap.ui.model.type.Date()
 							});
-							// that.getView().byId("DP2").setEnabled(false);
+
 							that.getView().byId("idContType").setVisible(false);
 							for (var i = 0; i < oData.results.length; i++) {
 								if (oData.results[i].CondType === 'ZCO%') {
@@ -118,7 +118,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 							  that.getView().byId("idMainInsChk").setSelected(oData.results[0].MainIns)	;				
 						},
 						function _onError(oError) {
-							// that.oGloablDiaglogBox.close();
+
 						}
 
 					);
@@ -130,19 +130,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				this.aufnr = result.substr(result.indexOf("'") + 1, result.lastIndexOf("'") - result.indexOf("'") - 1);
 				
 			}
-			// if (!this.sContext) {
-			// 	this.sContext = "InsuranceSet('IN1')";
-			// }
 
-			// var oPath;
-
-			// if (this.sContext) {
-			// 	oPath = {
-			// 		path: "/" + this.sContext,
-			// 		parameters: oParams
-			// 	};
-			// 	this.getView().bindObject(oPath);
-			// }
 
 		},
 		clearValues: function(){
@@ -175,7 +163,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			this.getView().byId("idInsCond").removeAllItems();
 			this.getView().byId("idContType").setVisible(true);
 			this.getView().byId("idActInd").setPressed(false);
-			// this.getView().byId("idInsCond").unbindItems();
+
 			this.aufnr = "";
 			this.vbeln = "";
 		},
@@ -217,13 +205,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 		  },
 		_onPageNavButtonPress: function () {
-			// var oView = this.getView();
 
-			// // Destroy all controls of the page
-			// var aContent = oView.getContent();
-			// for (var i = 0; i < aContent.length; i++) {
-			// 	this.clearControls(aContent[i]);
-			// }
 
 			this.clearValues();
 
@@ -423,7 +405,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		  },
 		_onButtonPress3: function (oEvent) {
 
-			debugger;
+			
 
 			if(!this.getView().byId("DP1").getDateValue() || !this.getView().byId("DP2").getDateValue()){
 				MessageBox.error("Valid From and Valid To fields cannot be left blank!!!");
@@ -436,10 +418,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
 			var oModel = new sap.ui.model.odata.ODataModel(url, true);
 
-			// var cData = this.getOwnerComponent().getCompData().results[0];
+			
 			var that = this;
 			this.oMessage = new sap.ui.model.json.JSONModel();
-			// this.oGloablDiaglogBox.open();
+			
 			this.hData = {
 				"Aufnr": this.aufnr,
 				"Vbeln": this.vbeln,
@@ -663,11 +645,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		onInit: function () {
-			debugger;
+			
 			this.aufnr = "";this.vbeln = "";
 			this.actInd = false;
 
-			// this.getView().byId("idActInd").addStyleClass("active");
+			
 			this.oGloablDiaglogBox = new sap.m.BusyDialog();
 			this.contdata = new sap.ui.model.json.JSONModel();
 			this.getView().setModel(this.contdata, "contdata");
@@ -735,11 +717,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		oPayer: null,
 		oField: null,
 		searchBP: function (oEvent) {
-			debugger;
-			// this.oEventSrc = oEvent;
-			// this.id = oEvent.getSource().getId();
-			// this.name = oEvent.getSource().getName();
-			// var that = this;
+			
+
 
 			this.oField = oEvent.getSource();
 			//Because we cannot access this variable as controller object
@@ -759,7 +738,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					//Grant the access to the fragment from the view to the model
 					that.getView().addDependent(that.oPayer);
 					that.oPayer.setMultiSelect(false);
-					//4th binding syntax agg binding
+					
 					that.oPayer.bindAggregation("items", {
 						path: '/BusinessPartnerDetSet',
 						template: new sap.m.ObjectListItem({
@@ -767,7 +746,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 							intro: '{NAME}'
 						})
 					});
-					//check sdk functios for select dialog
+					
 					that.oPayer.open();
 				});
 			} else {
@@ -775,7 +754,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 		},
 		onConfirmPopup: function (oEvent) {
-			debugger;
+			
 			var sId = oEvent.getSource().getId();
 			if (sId.indexOf("kschl") != -1) {
 				var oSelectedItemObject = oEvent.getParameter("selectedItem");
@@ -827,12 +806,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 					},
 					function _onError(oError) {
-						// that.oGloablDiaglogBox.close();
+						
 					});
 			}
 		},
 		onSelectionChange: function (oEvent) {
-			debugger;
+			
 			var selectedValue = oEvent.getParameter("selectedItem").getKey();
 
 			this.cov = this.getView().byId("idCov")
@@ -857,9 +836,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 			}
 
 			const exCond = ['COV', 'DIS'];
-			// const exCondArr = this.getView().getModel("contdata").getData().filter((element) => {
-			// 	return !exCond.includes(element);
-			//   });
+			
 			const exCondArr = this.getView().getModel("contdata").getData().filter(item => !exCond.includes(item.CondType) && item.DocNumber === selectedValue);
 			this.getView().getModel("addlServ").setData(exCondArr);
 		},
@@ -903,7 +880,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 							})
 						],
 						selectionChange: function (oEvent) {
-							debugger;
+							
 							var selectedValue = oEvent.getParameter("selectedItem").getKey();
 
 							if (selectedValue === 'COV') {
@@ -937,7 +914,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				]
 			})
 			);
-			// this.getView().byId("idList").addItem(columnListItemNewLine);	
+			
 		},
 		onAddCond: function (oEvent) {
 			var that = this;
@@ -970,11 +947,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		oCondType: null,
 		oField: null,
 		getF4help: function (oEvent) {
-			debugger;
-			// this.oEventSrc = oEvent;
-			// this.id = oEvent.getSource().getId();
-			// this.name = oEvent.getSource().getName();
-			// var that = this;
+			
 
 			this.oField = oEvent.getSource();
 			//Because we cannot access this variable as controller object
@@ -1011,7 +984,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		onChange: function (oEvent) {
-			debugger;
+			
 		},
 		onExit: function () {
 

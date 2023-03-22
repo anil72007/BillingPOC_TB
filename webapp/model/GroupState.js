@@ -47,6 +47,12 @@ return BaseObject.extend("com.sap.build.standard.pocPatientServiceAndInvoice.mod
                     new Sorter("Kunrg", false, this._groupByKunrg.bind(this))
                     ];
                 break;
+
+            case "ShortText":
+                aSorters = [
+                    new Sorter("ShortText", false, this._groupByShortText.bind(this))
+                    ];
+                break;
             default:
                 // Revert to original sorter as defined in view XML.
                 aSorters = this._oSorters[this._KEY_NO_GROUPING];
@@ -57,6 +63,14 @@ return BaseObject.extend("com.sap.build.standard.pocPatientServiceAndInvoice.mod
         this._oSorters[sKey] = aSorters;
 
         return aSorters;
+    },
+    _groupByShortText: function (oContext) {
+        var shortText = oContext.getProperty("ShortText");
+        
+        return {
+            key: shortText,
+            text: shortText
+        };
     },
     _groupByKunrg: function (oContext) {
         var sKunrg = oContext.getProperty("Kunrg");

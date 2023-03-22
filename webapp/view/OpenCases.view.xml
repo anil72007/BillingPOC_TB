@@ -14,7 +14,7 @@
     <Page title="Open Case List" class="sapUiContentPadding sapUiResponsivePadding--header sapUiResponsivePadding--subHeader 
     sapUiResponsivePadding--content sapUiResponsivePadding--footer" showNavButton="true">
         <VBox fitContainer="true">
-            <!-- <Button id="toggleUpdateMode" text="Change to 'LiveMode'" press="toggleUpdateMode" /> -->
+            <Button id="toggleUpdateMode" text="Change to 'LiveMode'" press="toggleUpdateMode" />
 
             <smartFilterBar:SmartFilterBar id="smartFilterBar" entitySet="GetCaseDataSet" enableBasicSearch="false" showClearButton="true">
                 <smartFilterBar:layoutData>
@@ -57,9 +57,10 @@
                     <smartFilterBar:ControlConfiguration key="CustomFilterField" index="2" label="Billing Status" groupId="_BASIC_1" width="auto" visibleInAdvancedArea="true">
                         <smartFilterBar:customControl>
                             <MultiComboBox id="multiComboBox" customData:hasValue="true">
-                                <core:Item key="1" text="Final Bill" />
-                                <core:Item key="2" text="Interim Bill" />
-                                <core:Item key="3" text="Not Billed" />
+                                <core:Item key="FB" text="Final Bill" />
+                                <core:Item key="PB" text="Partial Bill" />
+                                <core:Item key="NB" text="Not Billed" />
+                                <core:Item key="BE" text="Bill with Error" />
                             </MultiComboBox>
                             <!-- <Input value="{Remark}" type="Text" showValueHelp="true" enabled="true" visible="true" width="auto" 
                             valueHelpOnly="true" required="false" valueStateText="Invalid entry" maxLength="0"/>                             -->
@@ -69,9 +70,9 @@
                     <smartFilterBar:ControlConfiguration key="CustomFilterField_4" index="4" label="Case Status" groupId="_BASIC_1" 
                     width="auto" visibleInAdvancedArea="true">
                         <smartFilterBar:customControl>
-                            <MultiComboBox id="idCaseStatus" customData:hasValue="true" >
-                                <!-- <core:Item key="{KSCHL}" text="{VTEXT}" /> items="{ path: '/GetConditionTypeSet'}"-->
-                                <core:Item key="CRTD" text="Created" />
+                            <MultiComboBox id="idCaseStatus" customData:hasValue="true" items="{ path: '/GetStatusSet'}">
+                                <core:Item key="{TXT04}" text="{TXT30}" /> 
+                                <!-- <core:Item key="CRTD" text="Created" /> -->
                             </MultiComboBox>
 
                         </smartFilterBar:customControl>
@@ -129,7 +130,7 @@
                 persistencyKey="SmartTableAnalytical_Explored"
                 demandPopin="true"
                 beforeRebindTable="onBeforeRebindTable"
-                
+                ignoreFromPersonalisation="Mode,Standardaddress,COName,PartNo,CaseStatus"
             >
                 <Table mode="SingleSelectMaster" itemPress="onItemPressSupp" growingThreshold="20" growing="true" growingScrollToLoad="true">
                     <columns>
@@ -171,15 +172,39 @@
                         </Column>
                         <Column hAlign='End'>
                             <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "ValidFrom", "leadingProperty": "ValidFrom"}' />
+                            </customData>
+                            <Text text="Valid From" />
+                        </Column>
+                        <Column hAlign='End'>
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "ValidTo", "leadingProperty": "ValidTo"}' />
+                            </customData>
+                            <Text text="Valid To" />
+                        </Column>
+                        <Column hAlign='End' visible="false">
+                            <customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "Age", "leadingProperty": "Age"}' />
                             </customData>
                             <Text text="Age" />
                         </Column>
-                        <Column hAlign='End'>
+                        <Column hAlign='End' visible="false">
                             <customData>
                                 <core:CustomData key="p13nData" value='\{"columnKey": "Sex", "leadingProperty": "Sex"}' />
                             </customData>
                             <Text text="Sex" />
+                        </Column>
+                        <Column hAlign='End' visible="false">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "City", "leadingProperty": "City"}' />
+                            </customData>
+                            <Text text="City" />
+                        </Column>
+                        <Column hAlign='End' visible="false">
+                            <customData>
+                                <core:CustomData key="p13nData" value='\{"columnKey": "District", "leadingProperty": "District"}' />
+                            </customData>
+                            <Text text="District" />
                         </Column>
                     </columns>
                     <items>
@@ -191,8 +216,12 @@
                                 <smartlink:SmartLink text="{PatientId}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" />
                                 <smartlink:SmartLink text="{NameFirst}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" />
                                 <smartlink:SmartLink text="{NameLast}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" />
-                                <smartlink:SmartLink text="{Age}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" />
-                                <smartlink:SmartLink text="{Sex}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" />
+                                <smartlink:SmartLink text="{path: 'ValidFrom', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" />
+                                <smartlink:SmartLink text="{path: 'ValidTo', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" />
+                                <smartlink:SmartLink text="{Age}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="true" visible="false"/>
+                                <smartlink:SmartLink text="{Sex}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" visible="false"/>
+                                <smartlink:SmartLink text="{City}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" visible="false"/>
+                                <smartlink:SmartLink text="{District}" semanticObject="demokit_smartlink_example_01_SemanticObjectPrice" enableAvailableActionsPersonalization="false" visible="false"/>
                             </cells>
                         </ColumnListItem>
                     </items>

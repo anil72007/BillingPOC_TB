@@ -4,7 +4,7 @@ sap.ui.define([
     'use strict';
     return {
         getStatus: function (Type) {
-            debugger;
+            
             switch (Type) {
                 case "S":
                     return "Success";

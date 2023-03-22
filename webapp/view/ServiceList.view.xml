@@ -1,490 +1,766 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.ServiceList" xmlns="sap.m" xmlns:unified="sap.ui.unified" xmlns:layout="sap.ui.layout">
-    <Page title="Detail Page" showHeader="true" showFooter="true" showNavButton="true" navButtonPress="onNavBack">
-        <content>
-            <ObjectHeader intro="{CaseTypeDesc}" title="{NameFirst} {/NameLast}" icon="sap-icon://person-placeholder" 
-            number="{CaseOrder}" numberUnit="{PatientId}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
-                <attributes>
-                    <ObjectAttribute title="Age" text="{path: 'Age'}" active="false" visible="true"/>
-                    <ObjectAttribute title="Sex:" text="{Sex}" active="false" visible="true"/>
-                </attributes>
-                <statuses/>
-                <markers/>
-            </ObjectHeader>
-            <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
-                <items>
-                    <ToolbarSpacer width="20px"/>
-                    <Button text="" type="Default" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress"/>
-                    <ToolbarSpacer width="20px"/>
-                    <unified:FileUploader buttonText="Browse..." style="Emphasized" icon="" buttonOnly="false" enabled="true" width="498.6499938964844px" iconFirst="true" uploadOnChange="true" maximumFileSize="10" mimeType="image/jpeg,image/gif,image/png,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" uploadComplete="_onFileUploaderUploadComplete" change="_onFileUploaderChange" typeMissmatch="_onFileUploaderTypeMissmatch" fileSizeExceed="_onFileUploaderFileSizeExceed">
-                        <unified:headerParameters/>
-                        <unified:parameters/>
-                        <unified:xhrSettings/>
-                    </unified:FileUploader>
-                    <MenuButton text="Bill" type="Default" width="auto" enabled="true" buttonMode="Regular" useDefaultActionOnly="false">
-                        <menu>
-                            <Menu title="">
-                                <items>
-                                    <MenuItem text="Test Bill" enabled="true" icon="sap-icon://edit" visible="true" startsSection="false">
-                                        <items/>
-                                    </MenuItem>
-                                    <MenuItem text="Interim Bill" enabled="true" icon="sap-icon://save" visible="true" startsSection="false">
-                                        <items/>
-                                    </MenuItem>
-                                    <MenuItem text="Final Bill" enabled="true" icon="sap-icon://open-folder" visible="true" startsSection="false" press="_onMenuItemPress">
-                                        <items/>
-                                    </MenuItem>
-                                    <MenuItem text="Display Bill" enabled="true" icon="" visible="true" startsSection="false" press="_onButtonInvoice">
-                                        <items/>
-                                    </MenuItem>
-                                </items>
-                            </Menu>
-                        </menu>
-                    </MenuButton>
-                    <Button text="Insurance Relationship" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" 
-                    press="_onButtonPress1"/>
-                    <ToolbarSpacer width="120px"/>
-                    <ToggleButton pressed="true" text="" icon="sap-icon://error" iconFirst="true" width="auto" enabled="true" visible="true" press="_onToggleButtonPress"/>
-                </items>
-                <layoutData/>
-            </HBox>
-            <IconTabBar expandable="false" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
-                <items>
-                    <IconTabFilter icon="sap-icon://wrench" iconColor="Positive" text="Admin Charge" count="" design="Vertical" showAll="false" 
-                    textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-                        <content>
-                            <Table id="idtab" width="auto" noDataText="No data" mode="Delete" showSeparators="All" growing="true" growingThreshold="20" 
-                            growingScrollToLoad="true" class="sapUiResponsiveMargin" itemPress="_onTableItemPress" delete="onDeleteRow"
-                            items="{path:'To_Items',filters: [ {path: 'MatlGroup', operator: 'EQ', value1: 'OSS000000'},
-                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}]}"
-                             >
-                                <infoToolbar/>
-                                <headerToolbar>
-                                    <OverflowToolbar>
-                                        <Title text="Admin Charges" level="H2"/>
-                                        <ToolbarSpacer></ToolbarSpacer>
-                                        <Button	icon="sap-icon://download" press="onDataExport" />
-                                    </OverflowToolbar>
-                                </headerToolbar>
-                                <columns>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem id="listitem" type="Active" highlight= "{= ${Mode} === '' ? 'None' : 'Success' }">
-                                        <cells>
-                                            <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true"/>
-                                            <Text text="{ItmNumber}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{Material}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ShortText}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None"/>
-                                           <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </content>
-                    </IconTabFilter>
-                    <IconTabFilter icon="sap-icon://bed" iconColor="Positive" text="Room Charge" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-                        <content>
-                            <Table id="idRoomChg" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" 
-                            growingScrollToLoad="true" class="sapUiResponsiveMargin" itemPress="_onTableItemPress"
-                           items="{path:'To_Items',filters: [ {path: 'MatlGroup', operator: 'EQ', value1: 'OSB000000'},
-                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}]}"                            
-                             >
-                                <infoToolbar/>
-                                <headerToolbar/>
-                                <columns>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem  type="Active">
-                                        <cells>
-                                            <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true"/>
-                                            <Text text="{ItmNumber}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{Material}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ShortText}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None"/>
-                                           <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </content>
-                    </IconTabFilter>
-                    <IconTabFilter icon="sap-icon://expense-report" iconColor="Positive" text="Consumable" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-                        <content>
-                            <Table id="idConsumable" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" 
-                            growingScrollToLoad="true" class="sapUiResponsiveMargin" itemPress="_onTableItemPress"
-                           items="{path:'To_Items',filters: [ {path: 'MatlGroup', operator: 'EQ', value1: 'RAWMAT1'},
-                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}]}"                             
-                             >
-                                <infoToolbar/>
-                                <headerToolbar/>
-                                <columns>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem  type="Active">
-                                        <cells>
-                                            <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true"/>
-                                            <Text text="{ItmNumber}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{Material}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ShortText}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None"/>
-                                           <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </content>
-                    </IconTabFilter>
-                    <IconTabFilter icon="sap-icon://syringe" iconColor="Positive" text="Medication" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-                        <content>
-                            <Table id="idMedication" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" 
-                            growingScrollToLoad="true" class="sapUiResponsiveMargin" itemPress="_onTableItemPress"
-                                                       items="{path:'To_Items',filters: [ {path: 'MatlGroup', operator: 'EQ', value1: 'RAWMAT2'},
-                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}]}" 
-                             >
-                                <infoToolbar/>
-                                <headerToolbar/>
-                                <columns>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem  type="Active">
-                                        <cells>
-                                            <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true"/>
-                                            <Text text="{ItmNumber}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{Material}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ShortText}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None"/>
-                                           <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </content>
-                    </IconTabFilter>
-                    <IconTabFilter icon="sap-icon://example" iconColor="Positive" text="Examination" count="" design="Vertical" 
-                    showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-                        <content>
-                            <Table id="idExamination" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" 
-                            growingScrollToLoad="true" class="sapUiResponsiveMargin" itemPress="_onTableItemPress"
-                           items="{path:'To_Items',filters: [ {path: 'MatlGroup', operator: 'EQ', value1: 'OSC000000'},
-                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}]}"                             
-                             >
-                                <infoToolbar/>
-                                <headerToolbar/>
-                                <columns>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem  type="Active">
-                                        <cells>
-                                            <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true"/>
-                                            <Text text="{ItmNumber}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{Material}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ShortText}" 
-                                            width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None"/>
-                                           <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </content>
-                    </IconTabFilter>
-                    <!-- <IconTabFilter icon="sap-icon://crm-service-manager" iconColor="Positive" text="Service" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
-                        <content>
-                            <Table width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" itemPress="_onTableItemPress4" items="{path:'Clinical_Service', templateShareable:true}">
-                                <infoToolbar/>
-                                <headerToolbar/>
-                                <columns>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Physician" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Qty" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                    <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
-                                        <header>
-                                            <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                        </header>
-                                        <footer/>
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem type="Active">
-                                        <cells>
-                                            <ObjectIdentifier title="{Description}" text="" titleActive="false" visible="true"/>
-                                            <ObjectIdentifier title="{Physician}" text="" titleActive="false" visible="true"/>
-                                            <Text text="{path: 'Date', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <Text text="{path: 'Qty', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
-                                            <ObjectNumber number="{path: 'Price', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="USD" emphasized="true" state="None"/>
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                        </content>
-                    </IconTabFilter> -->
-                </items>
-                <content/>
-            </IconTabBar>
-        </content>
-        <footer>
-            <OverflowToolbar width="100%" height="46px" design="Auto" enabled="true" visible="true">
-                <content>
-                    <ToolbarSpacer width=""/>
-                     <Button text="Save" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onSaveItems" />
-                </content>
-            </OverflowToolbar>
-        </footer>
-        <headerContent/>
-    </Page>
+<mvc:View
+    controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.ServiceList"
+    xmlns:goals="com.sap.build.standard.pocPatientServiceAndInvoice.SharedBlocks.goals"
+    xmlns="sap.m"
+    xmlns:unified="sap.ui.unified"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.m.semantic"
+    xmlns:layout="sap.ui.layout"
+    xmlns:sap.ui.dt="sap.ui.dt"
+    xmlns:main="sap.ui.webc.main"
+    xmlns:ux="sap.uxap"
+    height="100%"
+>
+    <semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="true" title="Case Overview" busy="{= !(${displayView>/dataLoaded} || ${displayView>/showsMessage}) }" busyIndicatorDelay="{= ${appProperties>/detailImmediateBusy} ? 0 : ${displayView>/originalBusyDelay} }">
+        <!-- <semantic:customHeaderContent>
+			<Button id="adaptationMode" text="{i18n>xbut.adaptui}" visible="{app>/showAdaptButton}" press="switchToAdaptionMode" sap.ui.dt:designtime="not-adaptable" />
+		</semantic:customHeaderContent> -->
+        <semantic:content>
+            <ux:ObjectPageLayout id="ObjectPageLayout" subSectionLayout="TitleOnLeft" showTitleInHeaderContent="true" showEditHeaderButton="false" editHeaderButtonPress="handleEditBtnPress" upperCaseAnchorBar="false">
+                <ux:headerTitle>
+                    <ux:ObjectPageDynamicHeaderTitle>
+                        <ux:breadcrumbs>
+                            <Breadcrumbs id="breadcrumbsId" currentLocationText="{CaseTypeDesc}">
+                                <Link text="Consultation" press="handleLink1Press" />
+                                <Link text="Lab Visit" press="handleLink2Press" />
+                            </Breadcrumbs>
+                        </ux:breadcrumbs>
+                        <!-- <ux:heading>
+					<Title text="AnchorBar sample" wrapping="true"/>
+				</ux:heading> -->
+                        <ux:expandedHeading>
+                            <HBox>
+                                <Title id="idNam" text="{NameFirst} {NameLast}" wrapping="true" level="H3" />
+                                <ObjectMarker type="Favorite" class="sapUiTinyMarginBegin" />
+                            </HBox>
+                        </ux:expandedHeading>
+
+                        <ux:snappedHeading>
+                            <FlexBox fitContainer="true" alignItems="Center">
+                                <Title text="{NameFirst} {NameLast}" wrapping="true" />
+                            </FlexBox>
+                        </ux:snappedHeading>
+
+                        <ux:expandedContent>
+                            <ObjectStatus title="Patient ID" text="{path: 'PatientId'}" state="Error" class="sapUiMediumMarginEnd" />
+                            <!-- <Text text="{PatientId}" /> -->
+                        </ux:expandedContent>
+
+                        <ux:snappedContent>
+                            <Text text="{PatientId}" />
+                        </ux:snappedContent>
+
+                        <ux:snappedTitleOnMobile>
+                            <Title text="{PatientId}" />
+                        </ux:snappedTitleOnMobile>
+
+                        <ux:actions>
+                            <ObjectStatus title="Case Number :" text="{path: 'CaseOrder'}" state="Error" class="sapUiMediumMarginEnd" />
+                            <!-- <Title text="{CaseOrder}" /> -->
+                        </ux:actions>
+                    </ux:ObjectPageDynamicHeaderTitle>
+                </ux:headerTitle>
+
+                <ux:headerContent>
+                    <FlexBox wrap="Wrap" fitContainer="true">
+                        <Avatar class="sapUiSmallMarginEnd" src="https://sapui5.hana.ondemand.com/test-resources/sap/uxap/images/imageID_275314.png" displaySize="L" />
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <Link text="+65 8845 8678" />
+                            <Link text="bk.c@gmail.com" />
+                        </layout:VerticalLayout>
+
+                        <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+                            <Image src="./test-resources/sap/uxap/images/linkedin.png" />
+                            <Image src="./test-resources/sap/uxap/images/Twitter.png" class="sapUiSmallMarginBegin" />
+                        </layout:HorizontalLayout>
+
+                        <layout:VerticalLayout class="sapUiSmallMarginBeginEnd">
+                            <!-- <Label text="{path: 'Age'}" /> -->
+                            <ObjectStatus title="Age:" text="{path: 'Age'}" state="Success" class="sapUiMediumMarginEnd" />
+                            <!-- <VBox>
+                                <Label text="Case Data Progress" />
+                                <ProgressIndicator percentValue="30" displayValue="30%" />
+                            </VBox> -->
+                        </layout:VerticalLayout>
+
+                        <layout:HorizontalLayout class="sapUiSmallMarginBeginEnd">
+                            <!-- <Label text="{Sex}" /> -->
+                            <ObjectStatus title="Sex:" text="{path: 'Sex'}" state="Error" class="sapUiMediumMarginEnd" />
+                        </layout:HorizontalLayout>
+                    </FlexBox>
+                </ux:headerContent>
+
+                <ux:sections>
+                    <ux:ObjectPageSection titleUppercase="false" id="goalsSection11" title="Case Data General">
+                        <ux:subSections>
+                            <ux:ObjectPageSubSection>
+                                <ux:blocks>
+                                    <IconTabBar expandable="false" expanded="true" applyContentPadding="false" backgroundDesign="Solid" upperCase="false" visible="true" selectedKey="Ok">
+                                        <content>
+                                            <Label text="Jurong East, Singapore" />
+                                        </content>
+                                        <items>
+                                            <IconTabFilter icon="sap-icon://wrench" iconColor="Positive" text="Admin Charge" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                                <content>
+                                                    <Table
+                                                        id="idtab"
+                                                        width="auto"
+                                                        noDataText="No data"
+                                                        mode="Delete"
+                                                        showSeparators="All"
+                                                        growing="true"
+                                                        growingThreshold="20"
+                                                        growingScrollToLoad="true"
+                                                        class="sapUiResponsiveMargin"
+                                                        itemPress="_onTableItemPress"
+                                                        delete="onDeleteRow"
+                                                        items="{path:'To_Items',filters: [ {path: 'PrcGroup1', operator: 'EQ', value1: '001'},
+                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}],
+                                                                             sorter: [{ path: 'ShortText',
+                                                                                    descending: false,
+                                                                                    group:true }]}"
+                                                    >
+                                                        <infoToolbar />
+                                                        <headerToolbar>
+                                                            <OverflowToolbar>
+                                                                <Title text="Administrative Services" />
+                                                                <ToolbarSpacer />
+                                                                <Button icon="sap-icon://add" press="_onButtonPress" text="Add New Service">
+                                                                    <layoutData>
+                                                                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                                                    </layoutData>
+                                                                </Button>
+
+                                                                <Button icon="sap-icon://download" press="onDataExport" />
+                                                            </OverflowToolbar>
+                                                        </headerToolbar>
+                                                        <columns>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem id="listitem" type="Active" highlight="{= ${Mode} === '' ? 'None' : 'Success' }">
+                                                                <cells>
+                                                                    <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true" />
+                                                                    <Text text="{ItmNumber}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{Material}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ShortText}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
+                                                                    <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </content>
+                                            </IconTabFilter>
+                                            <IconTabFilter icon="sap-icon://bed" iconColor="Positive" text="Room Charge" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                                <content>
+                                                    <Table
+                                                        id="idRoomChg"
+                                                        width="auto"
+                                                        noDataText="No data"
+                                                        mode="Delete"
+                                                        showSeparators="All"
+                                                        growing="true"
+                                                        growingThreshold="20"
+                                                        growingScrollToLoad="true"
+                                                        delete="onDeleteRow"
+                                                        class="sapUiResponsiveMargin"
+                                                        itemPress="_onTableItemPress"
+                                                        items="{path:'To_Items',filters: [ {path: 'PrcGroup1', operator: 'EQ', value1: '002'},
+                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}],
+                                                                             sorter: [{ path: 'ShortText',
+                                                                                    descending: false,
+                                                                                    group:true }]}"
+                                                    >
+                                                        <infoToolbar />
+                                                        <headerToolbar>
+                                                            <OverflowToolbar>
+                                                                <Title text="Accomodation Services" level="H1" />
+                                                                <ToolbarSpacer />
+                                                                <Button icon="sap-icon://add" press="_onButtonPress" text="Add New Service">
+                                                                    <layoutData>
+                                                                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                                                    </layoutData>
+                                                                </Button>
+                                                                <!-- <ToolbarSpacer /> -->
+                                                                <Button icon="sap-icon://download" press="onDataExport" />
+                                                            </OverflowToolbar>
+                                                        </headerToolbar>
+                                                        <columns>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem type="Active">
+                                                                <cells>
+                                                                    <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true" />
+                                                                    <Text text="{ItmNumber}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{Material}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ShortText}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
+                                                                    <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </content>
+                                            </IconTabFilter>
+                                            <IconTabFilter icon="sap-icon://expense-report" iconColor="Positive" text="Consumable" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                                <content>
+                                                    <Table
+                                                        id="idConsumable"
+                                                        width="auto"
+                                                        noDataText="No data"
+                                                        mode="Delete"
+                                                        showSeparators="All"
+                                                        growing="true"
+                                                        delete="onDeleteRow"
+                                                        growingThreshold="20"
+                                                        growingScrollToLoad="true"
+                                                        class="sapUiResponsiveMargin"
+                                                        itemPress="_onTableItemPress"
+                                                        items="{path:'To_Items',filters: [ {path: 'PrcGroup1', operator: 'EQ', value1: '003'},
+                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}],
+                                                                             sorter: [{ path: 'ShortText',
+                                                                                    descending: false,
+                                                                                    group:true }]}"
+                                                    >
+                                                        <infoToolbar />
+                                                        <headerToolbar>
+                                                            <OverflowToolbar>
+                                                                <Title text="Consumable Services" level="H1" />
+                                                                <ToolbarSpacer />
+                                                                <Button icon="sap-icon://add" press="_onButtonPress" text="Add New Service">
+                                                                    <layoutData>
+                                                                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                                                    </layoutData>
+                                                                </Button>
+                                                                <!-- <ToolbarSpacer /> -->
+                                                                <Button icon="sap-icon://download" press="onDataExport" />
+                                                            </OverflowToolbar>
+                                                        </headerToolbar>
+                                                        <columns>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem type="Active">
+                                                                <cells>
+                                                                    <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true" />
+                                                                    <Text text="{ItmNumber}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{Material}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ShortText}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
+                                                                    <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </content>
+                                            </IconTabFilter>
+                                            <IconTabFilter icon="sap-icon://syringe" iconColor="Positive" text="Medication" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                                <content>
+                                                    <Table
+                                                        id="idMedication"
+                                                        width="auto"
+                                                        noDataText="No data"
+                                                        mode="Delete"
+                                                        showSeparators="All"
+                                                        growing="true"
+                                                        delete="onDeleteRow"
+                                                        growingThreshold="20"
+                                                        growingScrollToLoad="true"
+                                                        class="sapUiResponsiveMargin"
+                                                        itemPress="_onTableItemPress"
+                                                        items="{path:'To_Items',filters: [ {path: 'PrcGroup1', operator: 'EQ', value1: '004'},
+                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}],
+                                                                             sorter: [{ path: 'ShortText',
+                                                                                    descending: false,
+                                                                                    group:true }]}"
+                                                    >
+                                                        <infoToolbar />
+                                                        <headerToolbar>
+                                                            <OverflowToolbar>
+                                                                <Title text="Medication Services" level="H1" />
+                                                                <ToolbarSpacer />
+                                                                <Button icon="sap-icon://add" press="_onButtonPress" text="Add New Service">
+                                                                    <layoutData>
+                                                                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                                                    </layoutData>
+                                                                </Button>
+                                                                <!-- <ToolbarSpacer /> -->
+                                                                <Button icon="sap-icon://download" press="onDataExport" />
+                                                            </OverflowToolbar>
+                                                        </headerToolbar>
+                                                        <columns>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem type="Active">
+                                                                <cells>
+                                                                    <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true" />
+                                                                    <Text text="{ItmNumber}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{Material}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ShortText}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
+                                                                    <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </content>
+                                            </IconTabFilter>
+                                            <IconTabFilter icon="sap-icon://example" iconColor="Positive" text="Examination" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                                <content>
+                                                    <Table
+                                                        id="idExamination"
+                                                        width="auto"
+                                                        noDataText="No data"
+                                                        mode="Delete"
+                                                        showSeparators="All"
+                                                        growing="true"
+                                                        delete="onDeleteRow"
+                                                        growingThreshold="20"
+                                                        growingScrollToLoad="true"
+                                                        class="sapUiResponsiveMargin"
+                                                        itemPress="_onTableItemPress"
+                                                        items="{path:'To_Items',filters: [ {path: 'PrcGroup1', operator: 'EQ', value1: '005'},
+                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}],
+                                                                             sorter: [{ path: 'ShortText',
+                                                                                    descending: false,
+                                                                                    group:true }]}"
+                                                    >
+                                                        <infoToolbar />
+                                                        <headerToolbar>
+                                                            <OverflowToolbar>
+                                                                <Title text="Examination Services" level="H1" />
+                                                                <ToolbarSpacer />
+                                                                <Button icon="sap-icon://add" press="_onButtonPress" text="Add New Service">
+                                                                    <layoutData>
+                                                                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                                                    </layoutData>
+                                                                </Button>
+                                                                <!-- <ToolbarSpacer /> -->
+                                                                <Button icon="sap-icon://download" press="onDataExport" />
+                                                            </OverflowToolbar>
+                                                        </headerToolbar>
+                                                        <columns>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem type="Active">
+                                                                <cells>
+                                                                    <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true" />
+                                                                    <Text text="{ItmNumber}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{Material}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ShortText}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
+                                                                    <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </content>
+                                            </IconTabFilter>
+                                            <IconTabFilter icon="sap-icon://example" iconColor="Positive" text="Clinical/Prof Services" count="" design="Vertical" showAll="false" textDirection="Inherit" enabled="true" visible="true" iconDensityAware="false">
+                                                <content>
+                                                    <Table
+                                                        id="idClinical"
+                                                        width="auto"
+                                                        noDataText="No data"
+                                                        mode="Delete"
+                                                        showSeparators="All"
+                                                        growing="true"
+                                                        delete="onDeleteRow"
+                                                        growingThreshold="20"
+                                                        growingScrollToLoad="true"
+                                                        class="sapUiResponsiveMargin"
+                                                        itemPress="_onTableItemPress"
+                                                        items="{path:'To_Items',filters: [ {path: 'PrcGroup1', operator: 'EQ', value1: '006'},
+                                                                             {path: 'ItemCateg', operator: 'EQ', value1: 'ZADH'}],
+                                                                             sorter: [{ path: 'ShortText',
+                                                                                    descending: false,
+                                                                                    group:true }]}"
+                                                    >
+                                                        <infoToolbar />
+                                                        <headerToolbar>
+                                                            <OverflowToolbar>
+                                                                <Title text="Clinical/Prof Services" level="H1" />
+                                                                <ToolbarSpacer />
+                                                                <Button icon="sap-icon://add" press="_onButtonPress" text="Add New Service">
+                                                                    <layoutData>
+                                                                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                                                    </layoutData>
+                                                                </Button>
+                                                                <!-- <ToolbarSpacer /> -->
+                                                                <Button icon="sap-icon://download" press="onDataExport" />
+                                                            </OverflowToolbar>
+                                                        </headerToolbar>
+                                                        <columns>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Document Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Item Number" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Service Description" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Quantity" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Price" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                            <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false">
+                                                                <header>
+                                                                    <Text text="Creation Date" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </header>
+                                                                <footer />
+                                                            </Column>
+                                                        </columns>
+                                                        <items>
+                                                            <ColumnListItem type="Active">
+                                                                <cells>
+                                                                    <ObjectIdentifier title="{DocNumber}" text="" titleActive="false" visible="true" />
+                                                                    <Text text="{ItmNumber}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{Material}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ShortText}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <Text text="{ReqQty}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                    <ObjectNumber number="{path: 'NetValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" unit="SGD" emphasized="true" state="None" />
+                                                                    <Text text="{path: 'CreatDate', type: 'sap.ui.model.type.Date', formatOptions: { UTC: true, style: 'short' }}" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="true" />
+                                                                </cells>
+                                                            </ColumnListItem>
+                                                        </items>
+                                                    </Table>
+                                                </content>
+                                            </IconTabFilter>
+                                        </items>
+                                        <content />
+                                    </IconTabBar>
+                                </ux:blocks>
+                            </ux:ObjectPageSubSection>
+                            <ux:ObjectPageSubSection id="goalsSectionSS111">
+                                <ux:blocks />
+                            </ux:ObjectPageSubSection>
+                        </ux:subSections>
+                    </ux:ObjectPageSection>
+                    <ux:ObjectPageSection titleUppercase="false" id="goalsSectio11n" title="Billing/Insurance">
+                        <ux:subSections>
+                            <ux:ObjectPageSubSection id="goalsSectionSS1111">
+                                <ux:blocks>
+                                    <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                        <items>
+                                            <Button icon="sap-icon://monitor-payments" press="_onButtonInvoice" text="Go To Billing">
+                                                <layoutData>
+                                                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                                </layoutData>
+                                            </Button>
+                                            <Button text="Insurance Relationship" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1" />
+                                            <ToggleButton pressed="true" text="" icon="sap-icon://error" iconFirst="true" width="auto" enabled="true" visible="true" press="_onToggleButtonPress" />
+                                        </items>
+                                    </HBox>
+                                </ux:blocks>
+                            </ux:ObjectPageSubSection>
+                        </ux:subSections>
+                    </ux:ObjectPageSection>
+                    <ux:ObjectPageSection title="Upload Service from Excel" titleUppercase="false" id="goalsSection">
+                        <ux:subSections>
+                            <ux:ObjectPageSubSection id="goalsSectionSS1">
+                                <ux:blocks>
+                                    <!-- <goals:GoalsBlock id="goalsblock" /> -->
+                                    <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+                                        <items>
+                                            <!-- <ToolbarSpacer width="20px" />
+                                            <Button text="" type="Default" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" 
+                                            iconDensityAware="false" press="_onButtonPress" />
+                                            <ToolbarSpacer width="20px" /> -->
+                                            <unified:FileUploader
+                                                buttonText="Browse..."
+                                                style="Emphasized"
+                                                icon=""
+                                                buttonOnly="false"
+                                                enabled="true"
+                                                width="498.6499938964844px"
+                                                iconFirst="true"
+                                                uploadOnChange="true"
+                                                maximumFileSize="10"
+                                                mimeType="image/jpeg,image/gif,image/png,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                                uploadComplete="_onFileUploaderUploadComplete"
+                                                change="_onFileUploaderChange"
+                                                typeMissmatch="_onFileUploaderTypeMissmatch"
+                                                fileSizeExceed="_onFileUploaderFileSizeExceed"
+                                            >
+                                                <unified:headerParameters />
+                                                <unified:parameters />
+                                                <unified:xhrSettings />
+                                            </unified:FileUploader>
+                                        </items>
+                                        <layoutData />
+                                    </HBox>
+                                </ux:blocks>
+                            </ux:ObjectPageSubSection>
+                        </ux:subSections>
+                    </ux:ObjectPageSection>
+                </ux:sections>
+                <ux:footer>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button type="Accept" text="Accept" />
+                        <Button type="Reject" text="Reject" />
+                    </OverflowToolbar>
+                </ux:footer>
+            </ux:ObjectPageLayout>
+        </semantic:content>
+        <!-- <semantic:editAction>
+            <semantic:EditAction id="Save" press="onEdit" />
+        </semantic:editAction>
+        <semantic:deleteAction>
+            <semantic:DeleteAction id="delete" press="onDelete" />
+        </semantic:deleteAction> -->
+        <semantic:customFooterContent>
+            <Button type="Emphasized" id="copyButton" text="Save Data" press="onSaveItems" />
+        </semantic:customFooterContent>
+        <semantic:customFooterContent>
+            <Button type="Back" id="cancel" text="Cancel" press="onNavBack" />
+        </semantic:customFooterContent>
+        <!-- <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press="sendEmail" />
+        </semantic:sendEmailAction> -->
+    </semantic:DetailPage>
 </mvc:View>

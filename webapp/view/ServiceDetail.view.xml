@@ -25,7 +25,7 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
                         <expandedHeading>
                             <m:HBox>
                                 <m:Title text="Condition Record View" wrapping="true" />
-                                <m:ObjectMarker type="Favorite" class="sapUiTinyMarginBegin" />
+                                <!-- <m:ObjectMarker type="Favorite" class="sapUiTinyMarginBegin" /> -->
                             </m:HBox>
                         </expandedHeading>
 
@@ -49,11 +49,11 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
                         </snappedTitleOnMobile> -->
 
                         <actions>
-                            <m:OverflowToolbarButton icon="sap-icon://edit" text="edit header" type="Emphasized" tooltip="edit">
+                            <!-- <m:OverflowToolbarButton icon="sap-icon://edit" text="edit header" type="Emphasized" tooltip="edit">
                                 <m:layoutData>
                                     <m:OverflowToolbarLayoutData priority="NeverOverflow" />
                                 </m:layoutData>
-                            </m:OverflowToolbarButton>
+                            </m:OverflowToolbarButton> -->
                             <!-- <m:OverflowToolbarButton icon="sap-icon://pull-down" text="show section" type="Emphasized" tooltip="pull-down" />
                             <m:OverflowToolbarButton icon="sap-icon://show" text="show state" tooltip="show" />
                             <m:Button text="Toggle Footer" press="toggleFooter" /> -->
@@ -154,7 +154,8 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
                         <subSections>
                             <ObjectPageSubSection id="goalsSectionSS1">
                                 <blocks>
-                            <m:Table id="idItemCond" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
+                            <m:Table id="idItemCond" width="auto" noDataText="No data" mode="None" showSeparators="All" growing="true" 
+                            growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin">
                                 <m:infoToolbar>
                                     <m:Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
                                         <m:content>
@@ -189,6 +190,12 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
                                         </m:header>
                                         <m:footer/>
                                     </m:Column>
+                                    <m:Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Tablet" demandPopin="true" popinDisplay="Inline" mergeDuplicates="false" visible="false">
+                                        <m:header>
+                                            <m:Text text="Remark" width="auto" maxLines="1" wrapping="false" textAlign="Begin" textDirection="Inherit" visible="false"/>
+                                        </m:header>
+                                        <m:footer/>
+                                    </m:Column>
                                 </m:columns>
                                 <m:items>
                                     <m:ColumnListItem id="idListItem" type="Active">
@@ -198,6 +205,7 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
                                             <m:Input value="{path: 'CondValue'}" type="Text" change="onRowChange" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false"  maxLength="0"/>
                                             <!-- <m:Input value="{path: 'CondValue', type: 'sap.ui.model.type.Float', formatOptions: { maxFractionDigits: 2 }}" type="Text" showValueHelp="false" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false"  maxLength="0"/> -->
                                             <m:Input value="{Remark}" type="Text" showValueHelp="false" change="onRowChange" enabled="true" visible="true" width="auto" valueHelpOnly="false" required="false" valueStateText="Invalid entry" maxLength="0"/>
+                                            <m:Text text="{Mode}" visible="false"/>
                                         </m:cells>
                                     </m:ColumnListItem>
                                 </m:items>
@@ -218,10 +226,20 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
                 </footer>
             </ObjectPageLayout>
         </semantic:content>
+        
+
         <semantic:customFooterContent>
-            <m:Button id="copyButton" text="Add Condition" press="onAdd" />
+            <m:Button type="Emphasized" id="save" text="Save Data" press="_onButtonPress" />
         </semantic:customFooterContent>
-        <semantic:editAction>
+
+        <semantic:customFooterContent>
+            <m:Button type="Back" id="cancel" text="Cancel" press="onCancel" />
+        </semantic:customFooterContent>
+
+        <semantic:customFooterContent>
+            <m:Button type="Accept" id="copyButton" text="Add Condition" press="onAdd" />
+        </semantic:customFooterContent>
+        <!-- <semantic:editAction>
             <semantic:EditAction id="Add" press="onAdd" />
         </semantic:editAction>
         <semantic:deleteAction>
@@ -230,6 +248,6 @@ xmlns:layout="sap.ui.layout" xmlns:sap.ui.dt="sap.ui.dt" xmlns="sap.uxap"
         
         <semantic:sendEmailAction>
             <semantic:SendEmailAction id="shareEmail" press="sendEmail" />
-        </semantic:sendEmailAction>
+        </semantic:sendEmailAction> -->
     </semantic:DetailPage>
 </mvc:View>

@@ -19,10 +19,10 @@ sap.ui.define([
 
 		},
 		onAfterRendering: function(){
-			debugger;
+			
 		},
 		onInit: function () {
-			debugger;
+			
 
 			var oTable = this.getView().byId("idInvoiceTab");
 			oTable.attachEvent("onAfterRendering", function() {
@@ -32,44 +32,7 @@ sap.ui.define([
 				var aSorters = this._oGroupState.groupBy("Kunrg");
 				this.getView().byId("idInvoiceTab").getBinding("items").sort(aSorters);
 			});
-			
-
-			// this.cData = this.getOwnerComponent().getCompData();
-			// var url = "/sap/opu/odata/sap/ZGW_BILLING_APP_SRV/";
-			// var oModel = new sap.ui.model.odata.ODataModel(url, true);
-			
-
-			// this.invoice = new sap.ui.model.json.JSONModel();
-			// this.invTab = this.getView().byId("idInvoiceTab");
-
-			// this.getView().setModel(this.invoice, "invoice");
-			// // this.invTab.setModel(this.invoice);
-			
-			// this.listInvoice = this.getView().byId("idInvoiceList");
-			// if (this.listInvoice) {
-			// 	this.listInvoiceTemp = this.listInvoice.clone();
-			// }
-
-			// var headItem = this.cData.results[0].To_Items.results.filter(item => item.ItemCateg === 'ZADH');
-			// var existingItem = headItem[headItem.length - 1];			
-			// var efilter = "$filter=Vbeln eq '" + existingItem.DocNumber + "'";
-
-
-			// var url = "InvoiceSet?" + "&&" + efilter;
-			// var that = this;
-			// this.oGloablDiaglogBox.open();
-			// oModel.read(url, null, null, null,
-			// 	function onSuccess(oData, oResponse) {
-			// 		debugger;
-			// 		var aSorters = that._oGroupState.groupBy("Kunrg");
-			// 		that.oGloablDiaglogBox.close();
-			// 		that.invoice.setData(oData.results);
-			// 		that.invTab.getBinding("items").sort(aSorters);
-			// 	},
-			// 	function _onError(oError) {
-			// 		that.oGloablDiaglogBox.close();
-			// 	}
-			// );			
+		
 		},
 		exit: function () {
 			delete this._oView;
@@ -87,7 +50,7 @@ sap.ui.define([
 			return this._oView.getController().getOwnerComponent();
 		},
 		onSubmitButtonPressed: function(oEvent){
-			debugger;
+			
 			var cData = this.getOwnerComponent().getCompData();
 			if (cData.results[0].To_Items.results[0].DocNumber) {
 				this.data = { "Vbeln": cData.results[0].To_Items.results[0].DocNumber };
@@ -98,16 +61,13 @@ sap.ui.define([
 				oModel.create("/InvoiceSet", this.data, {
 					method: "POST",
 					success: function (oResultData, oResponse) {
-						debugger;
+						
 						sap.m.MessageToast.show(oResultData.Zukri);
-						// var oData = that.getView().getModel("invoice").getData();
-						// oData.push(oResultData);
-						// that.getView().getModel("invoice").setData(oData);
 						that.getView().getModel().refresh();
 
 					},
 					error: function (e) {
-						debugger;
+						
 						sap.m.MessageToast.show("Error while creating Invoice");
 
 
@@ -121,7 +81,7 @@ sap.ui.define([
 
 		},
 		open: function () {
-			debugger;
+			
 			var oView = this._oView;
 			var oControl = this._oControl;
 
@@ -158,13 +118,13 @@ sap.ui.define([
 
 		},
 		_onButtonPress: function (oEvent) {
-			debugger;
+			
 			this.close();
 
 
 		},
 		doNavigate: function (sRouteName, oBindingContext, fnPromiseResolve, sViaRelation) {
-			debugger;
+			
 			var sPath = (oBindingContext) ? oBindingContext.getPath() : null;
 			var oModel = (oBindingContext) ? oBindingContext.getModel() : null;
 
@@ -221,7 +181,7 @@ sap.ui.define([
 
 		},
 		_onButtonPress1: function () {
-			debugger;
+			
 			this.close();
 
 		},
@@ -235,7 +195,7 @@ sap.ui.define([
 
 		},
 		onSelect: function (oEvent) {
-			debugger;
+			
 
 		},
 		handleSelectionFinish: function (oEvent) {
@@ -244,7 +204,7 @@ sap.ui.define([
 
 		},
 		onSearch: function (oEvent) {
-			debugger;
+			
 
 		},
 		onExit: function () {

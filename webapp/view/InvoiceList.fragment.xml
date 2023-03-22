@@ -1,87 +1,100 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.InvoiceList" 
-xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.table" xmlns:fo="sap.ui.layout.form">
+<core:FragmentDefinition xmlns:core="sap.ui.core" controllerName="com.sap.build.standard.pocPatientServiceAndInvoice.controller.InvoiceList" xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.table" xmlns:fo="sap.ui.layout.form">
     <Dialog horizontalScrolling="true" showHeader="true" state="None" stretch="true" title="Invoice List" type="Standard" verticalScrolling="true">
         <content>
-            <!-- <FlexBox height="100px" alignItems="Start" justifyContent="Start">
+            <ObjectHeader intro="{CaseTypeDesc}" title="{NameFirst} {/NameLast}" icon="sap-icon://person-placeholder" number="{CaseOrder}" numberUnit="{PatientId}" numberState="None" titleActive="false" backgroundDesign="Translucent" condensed="false" visible="true">
+                <attributes>
+                    <ObjectAttribute title="Age" text="{path: 'Age'}" active="false" visible="true" />
+                    <ObjectAttribute title="Sex:" text="{Sex}" active="false" visible="true" />
+                </attributes>
+                <statuses />
+                <markers />
+            </ObjectHeader>
+            <!-- <VBox class="sapUiSmallMargin">
+                <fo:SimpleForm
+                    id="SimpleFormDisplay480_Trial"
+                    editable="false"
+                    layout="ResponsiveGridLayout"
+                    title="Address"
+                    labelSpanXL="4"
+                    labelSpanL="4"
+                    labelSpanM="4"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="0"
+                    emptySpanL="0"
+                    emptySpanM="0"
+                    emptySpanS="0"
+                    columnsXL="3"
+                    columnsL="2"
+                    columnsM="2"
+                    singleContainerFullSize="false"
+                >
+                    <fo:content>
+                        <core:Title text="Billing Parameters" />
+                        <Select id="billStatus" selectedKey="{billStatus}">
+                            <items>
+                                <core:Item text="Final Bill" key="FB" />
+                                <core:Item text="Interim Bill" key="IB" />
+                                <core:Item text="Test Bill" key="TB" />
+                            </items>
+                        </Select>
+                        <Button type="Accept" text="Create Billing" press="onSubmitButtonPressed" ariaDescribedBy="acceptButtonDescription genericButtonDescription" />
 
-            </FlexBox> -->
-	<VBox class="sapUiSmallMargin">
-		<fo:SimpleForm id="SimpleFormDisplay480_Trial"
-			editable="false"
-			layout="ResponsiveGridLayout"
-			title="Address"
-			labelSpanXL="4"
-			labelSpanL="4"
-			labelSpanM="4"
-			labelSpanS="12"
-			adjustLabelSpan="false"
-			emptySpanXL="0"
-			emptySpanL="0"
-			emptySpanM="0"
-			emptySpanS="0"
-			columnsXL="3"
-			columnsL="2"
-			columnsM="2"
-			singleContainerFullSize="false" >
-			<fo:content>
-				<core:Title text="Billing Parameters" />
-                <Select id="billStatus" selectedKey="{billStatus}">
-					<items>
-						<core:Item text="Final Bill" key="FB"/>
-						<core:Item text="Interim Bill" key="IB"/>
-						<core:Item text="Test Bill" key="TB"/>
-					</items>
-				</Select>
-                <Button type="Accept"
-						text="Create Billing"
-						press="onSubmitButtonPressed" ariaDescribedBy="acceptButtonDescription genericButtonDescription" />
-				<!-- <Label text="Name" />
-				<Text text="{SupplierName}" />
-				<Label text="Street/No." />
-				<Text text="{Street} {HouseNumber}" />
-				<Label text="ZIP Code/City" />
-				<Text text="{ZIPCode} {City}" />
-				<Label text="Country" />
-				<Text text="{Country}" />
-				<core:Title text="Online" />
-				<Label text="Web" />
-				<Text text="{Url}" />
-				<Label text="Twitter" />
-				<Text text="{Twitter}" />
-				<Label text="Email" />
-				<Text text="{Email}" />
-				<Label text="Tel." />
-				<Text text="{Tel}" />
-				<Label text="SMS" />
-				<Text text="{Sms}" />
-				<core:Title text="Other" />
-				<Label text="Rating" />
-				<RatingIndicator value="{Rating}" displayOnly="true" /> -->
-				<Label text="Billing Status" />
-				<ProgressIndicator percentValue="50" displayOnly="true" />
-
-
-			</fo:content>
-		</fo:SimpleForm>
-	</VBox>
+                        <Label text="Billing Status" />
+                        <ProgressIndicator percentValue="50" displayOnly="true" />
+                    </fo:content>
+                </fo:SimpleForm>
+            </VBox> -->
             <FlexBox height="100px" alignItems="Start" justifyContent="Start">
-                <Table id="idInvoiceTab" width="auto" noDataText="No data" mode="MultiSelect" showSeparators="All" 
-                growing="true" growingThreshold="20" growingScrollToLoad="true" class="sapUiResponsiveMargin" 
-                items="{path: 'To_Invoice', sorter: [{ path: 'PayerNam',
+                <Table
+                    id="idInvoiceTab"
+                    width="auto"
+                    noDataText="No data"
+                    mode="MultiSelect"
+                    showSeparators="All"
+                    growing="true"
+                    growingThreshold="20"
+                    growingScrollToLoad="true"
+                    class="sapUiResponsiveMargin"
+                    items="{path: 'To_Invoice', sorter: [{ path: 'PayerNam',
                      descending: false,
                       group:true }, { path: 'Kunrg',
                      descending: true,
                       group:true }]
                       
-                      }">
-                    <!-- <infoToolbar>
-                        <Toolbar width="100%" height="auto" design="Auto" visible="false" enabled="true">
-                            <content>
-                                <Label text="Label" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true" />
-                            </content>
-                        </Toolbar>
-                    </infoToolbar>
-                    <headerToolbar /> -->
+                      }"
+                >
+                    <headerToolbar>
+                        <OverflowToolbar>
+                            <Title text="Insurance Overview" level="H2" />
+                            <ToolbarSpacer />
+                            <!-- Add the Grouping checkbox -->
+                            <!-- <CheckBox text="Enable Personalization Grouping" select="onTableGrouping" /> -->
+                            <!-- Add the Refresh button -->
+                            <MenuButton text="Bill" icon="sap-icon://add" type="Default" width="auto" enabled="true" buttonMode="Regular" useDefaultActionOnly="false">
+                                <menu>
+                                    <Menu title="">
+                                        <items>
+                                            
+                                            <MenuItem text="Interim Bill" enabled="true" icon="sap-icon://save" visible="true" startsSection="false" press= "onSubmitButtonPressed">
+                                                <items />
+                                            </MenuItem>
+                                            <MenuItem text="Final Bill" enabled="true" icon="sap-icon://open-folder" visible="true" startsSection="false" press="onSubmitButtonPressed">
+                                                <items />
+                                            </MenuItem>
+                                            
+                                        </items>
+                                    </Menu>
+                                </menu>
+                            </MenuButton>
+                            <!-- Add the Personalization button -->
+                            <!-- <Button icon="sap-icon://action-settings" press="onPersoButtonPressed">
+                                <layoutData>
+                                    <OverflowToolbarLayoutData priority="NeverOverflow" />
+                                </layoutData>
+                            </Button> -->
+                        </OverflowToolbar>
+                    </headerToolbar>
                     <columns>
                         <Column width="auto" hAlign="Left" vAlign="Top" minScreenWidth="Phone" demandPopin="false" popinDisplay="Inline" mergeDuplicates="false">
                             <header>

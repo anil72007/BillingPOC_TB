@@ -9,47 +9,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 	"use strict";
 
 	return BaseController.extend("com.sap.build.standard.pocPatientServiceAndInvoice.controller.ServiceDetail", {
+		
 		handleRouteMatched: function (oEvent) {
-			// var sAppId = "App6352534280e30701c54b4b6b";
-
-			// var oParams = {};
-
-			// this._oRootView = this.getOwnerComponent().getAggregation("rootControl");
-			// this._oRootView.getController().setMode(sap.m.SplitAppMode.HideMode);
-
-			// if (oEvent.mParameters.data.context) {
-			// 	this.sContext = oEvent.mParameters.data.context;
-
-			// } else {
-			// 	if (this.getOwnerComponent().getComponentData()) {
-			// 		var patternConvert = function(oParam) {
-			// 			if (Object.keys(oParam).length !== 0) {
-			// 				for (var prop in oParam) {
-			// 					if (prop !== "sourcePrototype" && prop.includes("Set")) {
-			// 						return prop + "(" + oParam[prop][0] + ")";
-			// 					}
-			// 				}
-			// 			}
-			// 		};
-
-			// 		this.sContext = patternConvert(this.getOwnerComponent().getComponentData().startupParameters);
-
-			// 	}
-			// }
-
-			// if (!this.sContext) {
-			// 	this.sContext = "Clinical_ServiceSet('S1')";
-			// }
-
-			// var oPath;
-
-			// if (this.sContext) {
-			// 	oPath = {
-			// 		path: "/" + this.sContext,
-			// 		parameters: oParams
-			// 	};
-			// 	this.getView().bindObject(oPath);
-			// }
+			
 
 		},
 		onRowChange: function (oEvent) {
@@ -65,22 +27,27 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				oEvent.getSource().getModel().getProperty(oEvent.getSource().getBindingContext().sPath).Mode = tData[0].Mode;
 			}
 			
-			//oEvent.getSource().getBindingInfo("value").binding.getPath()
-			//oEvent.getSource().getBindingContext().getProperty('CondValue')
 
-			// oEvent.getSource().getBindingContext().sPath
-			// oEvent.getSource().getModel().getProperty(oEvent.getSource().getBindingContext().sPath)
+		},
+		
+		onCancel: function(oEvent){
+			this.getOwnerComponent().setItem("");
+			var cData = JSON.parse(JSON.stringify(this.mData));
+			this.getOwnerComponent().setCompData(cData);
+			this._onButtonPress();
 		},
 		getConditionData: function (oEvent) {
-			debugger;
+			
 			var cData = this.getOwnerComponent().getCompData();
+
+			this.mData = JSON.parse(JSON.stringify(cData));
 			var ItmNumber = oEvent.getParameters().arguments.ItmNumber;
 			this.itemCondTab = this.getView().byId("idItemCond");
 			this.listitem = this.getView().byId("idListItem");
 			if (this.listitem) {
 				this.oTemplate = this.listitem.clone();
 			}
-
+			this.getOwnerComponent().setItem(ItmNumber);
 			this.itemCond = new sap.ui.model.json.JSONModel();
 			this.itemCond.setData(cData.results[0].To_ItemCond.results.filter(item => item.ItmNumber === ItmNumber));
 			this.itemCondTab.setModel(this.itemCond);
@@ -88,12 +55,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 				path: "/",
 				template: this.oTemplate
 			});
-			// var that = this;
-			// oBinding.attachEventOnce("updateFinished", function() {
-			// 	debugger;
-			// 	var inputColumn = that.itemCondTab.getColumns()[1];
-			// 	var inputControl = inputColumn.getTemplate().getContent()[0];
-			//   });
+
 			this.movement = new sap.ui.model.json.JSONModel();
 			this.movTab = this.getView().byId("idMovement");
 			this.listMovement = this.getView().byId("idListMovement");
@@ -111,9 +73,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 		},
 		onAdd: function (oEvent) {
 			var that = this;
-			// var cnt = parseInt(this.getView().byId("idFldVal").getCount()) + 1;
-			// cnt = cnt.toString();
-			// this.getView().byId("idFldVal").setCount(cnt);
+
 			var columnListItemNewLine = new sap.m.ColumnListItem({
 				cells: [
 
@@ -129,30 +89,29 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 					}),
 					new sap.m.Input({
 						value: "",
-						width: "auto"
+						width: "auto",
+						change: function (oEvent) {
+							// that.onRowChange(oEvent);
+						},
 					}),
 					new sap.m.Input({
 						value: "",
 						width: "auto"
 					}),
 					new sap.m.Text({
-						text: "UPD",
+						text: "INS_N",
 						visible: false
 					})
 				]
 			});
 			this.getView().byId("idItemCond").addItem(columnListItemNewLine);
+			
 		},
 
 		oCondType: null,
 		oField: null,
 		getF4help: function (oEvent) {
-			debugger;
-			// this.oEventSrc = oEvent;
-			// this.id = oEvent.getSource().getId();
-			// this.name = oEvent.getSource().getName();
-			// var that = this;
-
+			
 			this.oField = oEvent.getSource();
 			//Because we cannot access this variable as controller object
 			//inside callbacks/ promises, so we creeate a copy
@@ -188,7 +147,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		onConfirmPopup: function (oEvent) {
-			debugger;
+			
 			var sId = oEvent.getSource().getId();
 			//Get the selected item object from event confirm
 			var oSelectedItemObject = oEvent.getParameter("selectedItem");
@@ -200,6 +159,21 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		_onButtonPress: function () {
+			var oTable = this.getView().byId("idItemCond");
+			for(var i=0;i<oTable.getItems().length;i++){
+				if(oTable.getItems()[i].getCells()[3].getText() === 'INS_N'){
+					var cond = {
+						"CondType" : oTable.getItems()[i].getCells()[0].getValue(),
+						"CondTypeDesc" : oTable.getItems()[i].getCells()[0].getDescription(),
+						"CondValue" :oTable.getItems()[i].getCells()[1].getValue(),
+						"ItmNumber" : this.getOwnerComponent().getItem(),
+						"Mode" : "UPD",
+						"SdDoc" : this.itemCond.getData()[0].SdDoc
+					}
+					this.itemCond.getData().push(cond);
+					this.getOwnerComponent().getCompData().results[0].To_ItemCond.results.push(cond);
+				}
+			}
 			var oHistory = History.getInstance();
 			var sPreviousHash = oHistory.getPreviousHash();
 			var oQueryParams = this.getQueryParameters(window.location);
@@ -242,17 +216,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
 
 		},
 		onInit: function () {
+			this.mData;
 			this.oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			this.oRouter.getRoute("ConditionDetails").attachMatched(this.getConditionData, this);
 
-			// var inputColumn = this.getView().byId("idItemCond").getColumns()[0];
-
-			// var inputControl = inputColumn.getTemplate().getContent()[0];
-
-			// // Attach a change event listener to the input control
-			// inputControl.attachChange(function (event) {
-			// 	debugger;
-			// });
 		},
 		onExit: function () {
 

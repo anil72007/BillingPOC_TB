@@ -1,0 +1,44 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:forms="sap.ui.layout.form" xmlns="sap.m">
+    <forms:SimpleForm editable="false" layout="ColumnLayout">
+	 <ToolbarSpacer width="20px" />
+                <Button text="" type="Default" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress" />
+                <ToolbarSpacer width="20px" />
+        <!-- <HBox alignItems="Stretch" direction="Row" fitContainer="false" width="auto" height="auto" justifyContent="Start" renderType="Div" visible="true" displayInline="false">
+            <items>
+                <ToolbarSpacer width="20px" />
+                <Button text="" type="Default" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress" />
+                <ToolbarSpacer width="20px" />
+                <unified:FileUploader
+                    buttonText="Browse..."
+                    style="Emphasized"
+                    icon=""
+                    buttonOnly="false"
+                    enabled="true"
+                    width="498.6499938964844px"
+                    iconFirst="true"
+                    uploadOnChange="true"
+                    maximumFileSize="10"
+                    mimeType="image/jpeg,image/gif,image/png,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    uploadComplete="_onFileUploaderUploadComplete"
+                    change="_onFileUploaderChange"
+                    typeMissmatch="_onFileUploaderTypeMissmatch"
+                    fileSizeExceed="_onFileUploaderFileSizeExceed"
+                >
+                    <unified:headerParameters />
+                    <unified:parameters />
+                    <unified:xhrSettings />
+                </unified:FileUploader>
+                <Button icon="sap-icon://monitor-payments" press="_onButtonInvoice" text="Go To Billing">
+                    <layoutData>
+                        <OverflowToolbarLayoutData priority="NeverOverflow" />
+                    </layoutData>
+                </Button>
+
+                <Button text="Insurance Relationship" type="Default" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false" press="_onButtonPress1" />
+                <ToolbarSpacer width="120px" />
+                <ToggleButton pressed="true" text="" icon="sap-icon://error" iconFirst="true" width="auto" enabled="true" visible="true" press="_onToggleButtonPress" />
+            </items>
+            <layoutData />
+        </HBox> -->
+    </forms:SimpleForm>
+</mvc:View>
